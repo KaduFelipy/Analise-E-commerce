@@ -169,6 +169,251 @@
             </p>
         </section>
 
+        <section id="vendas">
+            <h2>Desempenho de vendas</h2>
+
+            <p>
+                Como o valor vendido evoluiu? Quais categorias mais contribuíram?
+                O crescimento veio acompanhado de mais pedidos ou de maior
+                valor por compra?
+            </p>
+
+            <p>
+                Nesta análise, consideramos os preços dos produtos de pedidos
+                com status delivered, sem incluir o frete. Os meses são definidos
+                pela data da compra.
+            </p>
+
+            <div class="indicadores">
+                <div class="indicador">
+                    <strong>R$ 13.221.498,11</strong>
+                    <span>valor dos produtos em toda a base selecionada</span>
+                </div>
+
+                <div class="indicador">
+                    <strong>96.478</strong>
+                    <span>pedidos entregues</span>
+                </div>
+
+                <div class="indicador">
+                    <strong>110.197</strong>
+                    <span>itens vendidos</span>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>1. O maior crescimento não foi o maior valor vendido</h2>
+
+            <p>
+                Entre fevereiro de 2017 e julho de 2018,
+                <strong>março de 2017 apresentou o maior crescimento mensal:
+                    53,36%</strong> em relação a fevereiro.
+            </p>
+
+            <p>
+                Já <strong>novembro de 2017 atingiu o maior valor vendido</strong>,
+                com R$ 987.765,37 e 7.289 pedidos. Em dezembro, o valor vendido
+                caiu 26,50% em relação a novembro.
+            </p>
+
+            <figure>
+                <a href="imagens/grafico_vendas_mensais.png" target="_blank" rel="noopener">
+                    <img src="imagens/grafico_vendas_mensais.png" alt="Três gráficos mensais apresentam valor vendido,
+                quantidade de pedidos e ticket médio, de fevereiro
+                de 2017 a julho de 2018.">
+                </a>
+
+                <figcaption>
+                    Clique para ampliar. Compare o mesmo mês nos três painéis
+                    para relacionar valor vendido, volume e ticket médio.
+                </figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>2. Mais pedidos podem compensar um ticket menor</h2>
+
+            <p>
+                Abril de 2017 teve o maior ticket médio do período comparável:
+                <strong>R$ 147,92</strong>. Julho apresentou o menor:
+                <strong>R$ 124,38</strong>.
+            </p>
+
+            <div class="tabela">
+                <table>
+                    <caption>
+                        Comparação entre abril e julho de 2017
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Indicador</th>
+                            <th scope="col">Abril de 2017</th>
+                            <th scope="col">Julho de 2017</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">Valor vendido</th>
+                            <td>R$ 340.669,68</td>
+                            <td>R$ 481.604,52</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Pedidos</th>
+                            <td>2.303</td>
+                            <td>3.872</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Ticket médio</th>
+                            <td>R$ 147,92</td>
+                            <td>R$ 124,38</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                Julho registrou maior valor vendido que abril,
+                mesmo com ticket menor, porque teve mais pedidos.
+                Novembro também liderou em valor vendido sem apresentar
+                o maior ticket médio.
+            </p>
+
+            <p>
+                <strong>
+                    Valor vendido = quantidade de pedidos × ticket médio.
+                </strong>
+                Por isso, o ticket deve ser interpretado junto do volume.
+            </p>
+        </section>
+
+        <section>
+            <h2>3. Quais categorias mais contribuem?</h2>
+
+            <p>
+                Considerando toda a base de pedidos entregues,
+                <strong>beleza e saúde liderou em valor vendido</strong>,
+                com R$ 1.233.131,72, equivalentes a 9,33% do total.
+            </p>
+
+            <div class="tabela">
+                <table>
+                    <caption>
+                        Três categorias com maior participação no valor vendido
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">Valor vendido</th>
+                            <th scope="col">Participação</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">Beleza e saúde</th>
+                            <td>R$ 1.233.131,72</td>
+                            <td>9,33%</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Relógios e presentes</th>
+                            <td>R$ 1.166.176,98</td>
+                            <td>8,82%</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Cama, mesa e banho</th>
+                            <td>R$ 1.023.434,76</td>
+                            <td>7,74%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                Outros R$ 170.726,63, ou 1,29% do total, estão associados
+                a itens sem categoria cadastrada. Esses valores foram
+                preservados no grupo “Sem categoria”.
+            </p>
+        </section>
+
+        <section class="conclusao">
+            <h2>4. Como usar esses resultados na gestão?</h2>
+
+            <p>
+                Acompanhar apenas o valor vendido pode esconder movimentos
+                diferentes. Uma mudança pode estar associada ao número
+                de pedidos, ao ticket médio ou a ambos.
+            </p>
+
+            <ul>
+                <li>
+                    Diante de uma queda no valor vendido, verificar primeiro
+                    a quantidade de pedidos e o ticket médio.
+                </li>
+
+                <li>
+                    Investigar os períodos de maior oscilação antes de atribuir
+                    o resultado a campanhas, promoções ou datas comemorativas.
+                </li>
+
+                <li>
+                    Acompanhar as categorias de maior participação, sem confundir
+                    valor vendido com margem ou lucro.
+                </li>
+
+                <li>
+                    Revisar o cadastro dos produtos sem categoria para melhorar
+                    a classificação, preservando seus valores na análise.
+                </li>
+            </ul>
+
+            <p>
+                <strong>
+                    O maior ticket não garante o maior valor vendido.
+                    O desempenho precisa ser lido junto do volume de pedidos.
+                </strong>
+            </p>
+        </section>
+
+        <section>
+            <h2>Critérios e limites da análise de vendas</h2>
+
+            <ul>
+                <li>
+                    Os totais e as participações das categorias utilizam toda
+                    a base selecionada de pedidos entregues.
+                </li>
+
+                <li>
+                    A comparação mensal principal considera fevereiro de 2017
+                    a julho de 2018. Os meses das extremidades apresentam
+                    limitações de cobertura.
+                </li>
+
+                <li>
+                    O ticket médio divide o valor dos produtos pela quantidade
+                    de pedidos distintos, e não pela quantidade de itens.
+                </li>
+
+                <li>
+                    O valor vendido não inclui frete e não representa
+                    lucro ou receita líquida.
+                </li>
+
+                <li>
+                    Não foram investigadas as causas das oscilações nem
+                    a contribuição das categorias em cada mês.
+                </li>
+            </ul>
+        </section>
+
         <footer>
             <h2>Critérios e limites</h2>
             <p>
