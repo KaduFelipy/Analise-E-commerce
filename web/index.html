@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análise de entregas - Olist</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main>
+        <header>
+            <p>ANÁLISE DE ENTREGAS — OLIST</p>
+            <h1>Onde investigar para reduzir os atrasos?</h1>
+            <p>
+                A maior taxa de atraso nem sempre representa a maior
+                quantidade de pedidos afetados. Para definir prioridades,
+                precisamos relacionar frequência, duração e volume.
+            </p>
+        </header>
+
+        <section>
+            <h2>1. Qual é o tamanho do problema?</h2>
+
+            <div class="indicadores">
+                <div class="indicador">
+                    <strong>96.470</strong>
+                    <span>entregas analisadas</span>
+                </div>
+
+                <div class="indicador">
+                    <strong>6.534</strong>
+                    <span>pedidos atrasados</span>
+                </div>
+
+                <div class="indicador">
+                    <strong>6,77%</strong>
+                    <span>taxa de atraso</span>
+                </div>
+            </div>
+
+            <p>
+                Entre os pedidos entregues com as duas datas preenchidas,
+                6,77% chegaram após o dia prometido. A taxa mostra a frequência
+                do problema, mas não revela a duração da espera adicional.
+            </p>
+        </section>
+
+        <section>
+            <h2>2. Quanto tempo os clientes esperaram além do prazo?</h2>
+
+            <p>
+                Entre os pedidos atrasados, o atraso médio foi de
+                <strong>10,62 dias</strong>. A mediana foi de
+                <strong>7 dias</strong>: pelo menos metade desses pedidos
+                teve atraso de até sete dias.
+            </p>
+
+            <p>
+                O maior atraso registrado foi de 188 dias. A média acima
+                da mediana sugere influência de atrasos mais longos,
+                que precisam ser investigados antes de qualquer exclusão.
+            </p>
+        </section>
+
+        <section>
+            <h2>3. O que os gráficos mostram?</h2>
+
+            <figure>
+                <a href="imagens/grafico_entregas.png" target="_blank" rel="noopener">
+                    <img src="imagens/grafico_entregas.png" alt="Quatro gráficos mostram a quantidade de entregas
+                        no prazo e atrasadas, a distribuição dos dias de atraso
+                        e a quantidade e a taxa de atraso por estado de destino.">
+                </a>
+
+                <figcaption>
+                    Clique na imagem para ampliar. Compare os dois gráficos
+                    estaduais: quantidade de atrasos e taxa de atraso
+                    respondem a perguntas diferentes.
+                </figcaption>
+            </figure>
+        </section>
+
+        <section>
+            <h2>4. Onde estão as diferentes prioridades?</h2>
+
+            <div class="tabela">
+                <table>
+                    <caption>Três estados que ilustram a diferença entre taxa e volume</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Destino</th>
+                            <th scope="col">Entregas analisadas</th>
+                            <th scope="col">Atrasados</th>
+                            <th scope="col">Taxa de atraso</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">Alagoas</th>
+                            <td>397</td>
+                            <td>85</td>
+                            <td>21,41%</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Rio de Janeiro</th>
+                            <td>12.350</td>
+                            <td>1.495</td>
+                            <td>12,11%</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">São Paulo</th>
+                            <td>40.494</td>
+                            <td>1.820</td>
+                            <td>4,49%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                <strong>Alagoas</strong> apresenta a maior taxa de atraso.
+                <strong>São Paulo</strong> concentra a maior quantidade,
+                mesmo com taxa abaixo da geral. O
+                <strong>Rio de Janeiro</strong> combina volume elevado
+                com taxa acima da referência de 6,77%.
+            </p>
+
+            <p>
+                Em um cenário ilustrativo, eliminar todos os 85 atrasos
+                de Alagoas evitaria menos casos do que reduzir em 10%
+                os atrasos do Rio de Janeiro: aproximadamente 150 pedidos.
+                Essa comparação mostra a diferença de escala,
+                sem indicar qual melhoria seria mais fácil de executar.
+            </p>
+        </section>
+
+        <section class="conclusao">
+            <h2>5. Que decisão esta análise orienta?</h2>
+
+            <p>
+                Para reduzir a quantidade total de atrasos, vale iniciar
+                uma investigação detalhada em São Paulo e no Rio de Janeiro.
+                Alagoas merece uma investigação específica pela elevada
+                proporção de entregas atrasadas.
+            </p>
+
+            <ul>
+                <li>
+                    Separar os resultados por mês e vendedor para localizar
+                    concentrações.
+                </li>
+                <li>
+                    Examinar os tempos entre compra, aprovação, envio e entrega.
+                </li>
+                <li>
+                    Comparar o prazo prometido com o tempo real de entrega.
+                </li>
+                <li>
+                    Avaliar causas, esforço e quantidade de atrasos evitáveis
+                    antes de escolher uma intervenção.
+                </li>
+            </ul>
+
+            <p>
+                A análise orienta onde investigar. Ainda não demonstra
+                necessidade de contratar pessoas ou trocar transportadoras.
+            </p>
+        </section>
+
+        <footer>
+            <h2>Critérios e limites</h2>
+            <p>
+                Foram considerados pedidos com status delivered e datas
+                real e prometida preenchidas. Oito pedidos com esse status
+                ficaram fora do cálculo por ausência da data real.
+                Uma entrega no próprio dia prometido foi considerada no prazo.
+            </p>
+            <p>
+                Os estados representam o destino dos clientes, sem atribuição
+                de responsabilidade. A base é histórica e os resultados não
+                comprovam causas nem representam a operação atual.
+            </p>
+            <p>
+                Fonte:
+                <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">
+                    Brazilian E-Commerce Public Dataset by Olist
+                </a>.
+            </p>
+        </footer>
+    </main>
+</body>
+
+</html>

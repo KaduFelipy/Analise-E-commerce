@@ -1,0 +1,2 @@
+#Indicar ao interpretador que o diretório onde está inserido deve ser tratado como um pacote Python.
+# Assim permitindo importar funções, classes ou variáveis de submódulos diretamente para o nível do pacote.
