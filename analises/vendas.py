@@ -40,7 +40,7 @@ pedidos_entregues = pedidos.loc[
 # print(f'Pedidos entregues sem itens \n{sem_itens.sum()}')
 
 itens_vendidos = itens.merge(
-    pedidos_entregues[['order_id','order_purchase_timestamp']],
+    pedidos_entregues[['order_id', 'customer_id','order_purchase_timestamp']],
     on='order_id',
     how='inner', #mantém somente itens que correspondem aos pedidos entregues selecionados.
     validate='many_to_one' #permite vários itens por pedido, exigindo um único registro correspondente na tabela de pedidos.
