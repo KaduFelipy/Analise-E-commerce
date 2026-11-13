@@ -598,6 +598,187 @@
             </p>
         </section>
 
+        <section id="satisfacao-fidelizacao">
+            <h2>Satisfação e recorrência de compra</h2>
+
+            <p>
+                <strong>Pedidos atrasados receberam avaliações menores.
+                    Clientes recorrentes acumularam maior valor em compras.</strong>
+                A análise reúne duas perspectivas da experiência do cliente:
+                a avaliação do pedido e a repetição de compras.
+            </p>
+
+            <figure>
+                <a href="imagens/grafico_satisfacao_fidelizacao.png" target="_blank" rel="noopener">
+                    <img src="imagens/grafico_satisfacao_fidelizacao.png" alt="Comparação das notas de pedidos no prazo e atrasados,
+                participação dos clientes recorrentes e comparação
+                do valor médio por pedido e por cliente.">
+                </a>
+
+                <figcaption>
+                    Clique para ampliar. As notas consideram pedidos com prazo
+                    avaliável e avaliação disponível. A recorrência considera
+                    clientes com pelo menos dois pedidos entregues na base.
+                </figcaption>
+            </figure>
+
+            <h3>Como o atraso se relaciona com as avaliações?</h3>
+
+            <p>
+                Os pedidos entregues no prazo receberam nota média de
+                <strong>4,29</strong>, enquanto os atrasados receberam
+                <strong>2,27</strong>. A diferença foi de aproximadamente
+                <strong>2,02 pontos</strong>.
+            </p>
+
+            <div class="tabela">
+                <table>
+                    <caption>Avaliações por situação da entrega</caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Situação</th>
+                            <th scope="col">Pedidos com nota</th>
+                            <th scope="col">Nota média</th>
+                            <th scope="col">Mediana</th>
+                            <th scope="col">Cobertura das avaliações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">No prazo</th>
+                            <td>89.443</td>
+                            <td>4,29</td>
+                            <td>5</td>
+                            <td>99,45%</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Atrasados</th>
+                            <td>6.381</td>
+                            <td>2,27</td>
+                            <td>1</td>
+                            <td>97,66%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                A cobertura foi elevada nos dois grupos. Dos 96.470 pedidos
+                com prazo avaliável, 646 ficaram sem nota correspondente.
+                A diferença observada orienta uma investigação sobre a
+                experiência dos clientes afetados por atrasos.
+            </p>
+
+            <h3>Quanto os clientes recorrentes representam?</h3>
+
+            <p>
+                Entre os 93.358 clientes com pedidos entregues,
+                <strong>2.801 realizaram pelo menos duas compras</strong>.
+                Eles representam <strong>3,00% dos clientes</strong>
+                e contribuíram com <strong>5,51% do valor vendido</strong>.
+            </p>
+
+            <div class="tabela">
+                <table>
+                    <caption>
+                        Compras entregues dos clientes na base histórica
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Grupo</th>
+                            <th scope="col">Clientes</th>
+                            <th scope="col">Pedidos</th>
+                            <th scope="col">Valor dos produtos</th>
+                            <th scope="col">Participação no valor</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">Uma compra entregue</th>
+                            <td>90.557</td>
+                            <td>90.557</td>
+                            <td>R$ 12.493.089,36</td>
+                            <td>94,49%</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Duas ou mais compras entregues</th>
+                            <td>2.801</td>
+                            <td>5.921</td>
+                            <td>R$ 728.408,75</td>
+                            <td>5,51%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>A contribuição aparece nas compras acumuladas</h3>
+
+            <p>
+                O ticket médio dos recorrentes foi de
+                <strong>R$ 123,02 por pedido</strong>. Entre os clientes
+                com uma única compra entregue, foi de
+                <strong>R$ 137,96</strong>.
+            </p>
+
+            <p>
+                Ao acumular várias compras, os recorrentes atingiram
+                <strong>R$ 260,05 em produtos por cliente</strong>,
+                em média. A leitura conjunta do ticket e do valor acumulado
+                permite acompanhar quanto cada pedido representa e quanto
+                o cliente comprou ao longo do período observado.
+            </p>
+        </section>
+
+        <section class="conclusao">
+            <h2>Como usar os resultados na gestão?</h2>
+
+            <ul>
+                <li>
+                    Acompanhar as avaliações dos pedidos atrasados e investigar
+                    os problemas relatados pelos clientes.
+                </li>
+
+                <li>
+                    Monitorar a participação dos clientes recorrentes,
+                    considerando quantidade de compras e valor acumulado.
+                </li>
+
+                <li>
+                    Avaliar ações de relacionamento com métricas de recompra,
+                    além do ticket médio por pedido.
+                </li>
+            </ul>
+
+            <h3>Critérios e limites</h3>
+
+            <p>
+                Pedidos com várias avaliações foram representados pela média
+                de suas notas. Cada pedido com nota disponível teve o mesmo
+                peso na comparação entre entregas no prazo e atrasadas.
+            </p>
+
+            <p>
+                Os clientes foram identificados por customer_unique_id.
+                A classificação de recorrência exige pelo menos dois pedidos
+                entregues distintos e considera somente o período disponível.
+                O valor dos recorrentes inclui todas as suas compras entregues
+                na base, inclusive a primeira, sem frete.
+            </p>
+
+            <p>
+                A comparação das notas mostra uma associação com o atraso.
+                Outros fatores ligados às avaliações ainda precisam ser
+                investigados. A relação entre atraso e decisão de voltar
+                a comprar também permanece sem avaliação.
+            </p>
+        </section>
+
         <footer>
             <h2>Critérios e limites</h2>
             <p>

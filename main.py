@@ -13,6 +13,8 @@ from graficos.geo import criar_grafico_geo
 from analises.vendedores import resumo_vendedores
 from graficos.vendedores import criar_grafico_vendedores
 
+from analises.satisfacao_fidelizacao import resumo_satisfacao, resumo_recorrencia
+from graficos.satisfacao_fidelizacao import criar_grafico_satisfacao_fidelizacao
 
 
 
@@ -29,6 +31,11 @@ caminho_grafico_geo = criar_grafico_geo(resumo_geo)
 caminho_grafico_vendedores = criar_grafico_vendedores(
     pedidos_analisados,
     resumo_vendedores
+)
+
+caminho_grafico_satisfacao = criar_grafico_satisfacao_fidelizacao(
+    resumo_satisfacao,
+    resumo_recorrencia
 )
 
 
@@ -48,6 +55,9 @@ if not caminho_grafico_geo.is_file():
     raise FileNotFoundError(f'Página não encontrada!')
 
 if not caminho_grafico_vendedores.is_file():
+    raise FileNotFoundError(f'Página não encontrada!')
+
+if not caminho_grafico_satisfacao.is_file():
     raise FileNotFoundError(f'Página não encontrada!')
 
 webbrowser.open(caminho_html.as_uri())
