@@ -1,0 +1,6 @@
+﻿atrasados,recorte_resposta,pedidos,registros,nota_media,cobertura_situacao
+False,"Antes da entrega, até o dia prometido",292,295,4.029109589041096,0.3246753246753247
+False,Na entrega ou depois,89263,89649,4.291261030139401,99.25169009073119
+True,"Antes da entrega, após o dia prometido",4431,4445,1.6348454073572558,67.81450872359963
+True,"Antes da entrega, até o dia prometido",53,54,3.4716981132075473,0.8111417202326294
+True,Na entrega ou depois,1908,1910,3.719601677148847,29.201101928374655

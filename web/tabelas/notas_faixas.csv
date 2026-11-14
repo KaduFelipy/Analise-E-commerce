@@ -1,0 +1,13 @@
+﻿faixa_atraso,recorte_resposta,pedidos,registros,nota_media
+1–7,"Antes da entrega, após o dia prometido",1751,1754,1.6436322101656196
+1–7,"Antes da entrega, até o dia prometido",24,24,3.0833333333333335
+1–7,Na entrega ou depois,1832,1834,3.734170305676856
+8–15,"Antes da entrega, após o dia prometido",1535,1539,1.59185667752443
+8–15,"Antes da entrega, até o dia prometido",12,13,3.8333333333333335
+8–15,Na entrega ou depois,57,57,3.526315789473684
+16–30,"Antes da entrega, após o dia prometido",834,839,1.5587529976019185
+16–30,"Antes da entrega, até o dia prometido",6,6,4.5
+16–30,Na entrega ou depois,12,12,3.1666666666666665
+Acima de 30,"Antes da entrega, após o dia prometido",311,313,2.0016077170418005
+Acima de 30,"Antes da entrega, até o dia prometido",11,11,3.3636363636363638
+Acima de 30,Na entrega ou depois,7,7,2.4285714285714284

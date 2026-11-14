@@ -182,6 +182,65 @@ resumo_estados['taxa_atraso'] = (
 assert resumo_estados['pedidos_entregues'].sum() == len(pedidos_por_estado)
 assert resumo_estados['pedidos_atrasados'].sum() == pedidos_por_estado['atrasados'].sum()
 
+pedidos_por_estado['mes_compra'] = pedidos_por_estado['order_purchase_timestamp'].dt.to_period('M')
+pedidos_por_estado['faixa_atraso'] = pd.cut(
+    pedidos_por_estado['dias_apos_prazo'], bins=[0, 7, 15, 30, float('inf')],
+    labels=['1–7', '8–15', '16–30', 'Acima de 30'],
+)
+resumo_estado_mes = pedidos_por_estado.groupby(['customer_state', 'mes_compra']).agg(
+    pedidos_avaliaveis=('order_id', 'size'), atrasados=('atrasados', 'sum'),
+)
+resumo_estado_mes['taxa_atraso'] = resumo_estado_mes['atrasados'] / resumo_estado_mes['pedidos_avaliaveis'] * 100
+severidade_estado_mes = pedidos_por_estado.loc[pedidos_por_estado['atrasados']].groupby(
+    ['customer_state', 'mes_compra'],
+)['dias_apos_prazo'].agg(mediana='median', percentil_90=lambda s: s.quantile(.9))
+resumo_estado_mes = resumo_estado_mes.join(severidade_estado_mes)
+resumo_faixas = pedidos_por_estado.groupby('faixa_atraso', observed=False).agg(pedidos=('order_id', 'size'))
+resumo_faixas['participacao_atrasados'] = resumo_faixas['pedidos'] / quantidade_atrasados * 100
+concentracao_mensal = pedidos_por_estado.groupby('mes_compra').agg(
+    pedidos_avaliaveis=('order_id', 'size'), atrasados=('atrasados', 'sum'),
+)
+concentracao_mensal['atrasados_sp_rj'] = pedidos_por_estado.loc[
+    pedidos_por_estado['customer_state'].isin(['SP', 'RJ'])
+].groupby('mes_compra')['atrasados'].sum()
+concentracao_mensal['participacao_sp_rj'] = concentracao_mensal['atrasados_sp_rj'] / concentracao_mensal['atrasados'].replace(0, float('nan')) * 100
+
+intervalos = {}
+for nome, inicio, fim in [
+    ('Compra → aprovação', 'order_purchase_timestamp', 'order_approved_at'),
+    ('Aprovação → transportador', 'order_approved_at', 'order_delivered_carrier_date'),
+    ('Transportador → cliente', 'order_delivered_carrier_date', 'order_delivered_customer_date'),
+]:
+    duracao = (pd.to_datetime(pedidos_analisados[fim]) - pd.to_datetime(pedidos_analisados[inicio])).dt.total_seconds() / 86400
+    validos = duracao.loc[duracao >= 0]
+    intervalos[nome] = {'validos': len(validos), 'ausentes': int(duracao.isna().sum()),
+                       'negativos': int((duracao < 0).sum()), 'mediana_dias': validos.median(),
+                       'percentil_90_dias': validos.quantile(.9)}
+resumo_intervalos = pd.DataFrame.from_dict(intervalos, orient='index')
+
+episodio_rj = resumo_estado_mes.loc[('RJ', slice('2018-02', '2018-03')), :].copy()
+selecionado_rj = pedidos_por_estado.loc[
+    pedidos_por_estado['customer_state'].eq('RJ') & pedidos_por_estado['mes_compra'].isin(pd.period_range('2018-02', '2018-03', freq='M'))
+]
+linhas_intervalos = []
+for recorte, dados_recorte in [
+    ('Geral', pedidos_por_estado),
+    ('RJ fev–mar/2018 no prazo', selecionado_rj.loc[~selecionado_rj['atrasados']]),
+    ('RJ fev–mar/2018 atrasados', selecionado_rj.loc[selecionado_rj['atrasados']]),
+    ('RJ fev–mar/2018 acima de 30 dias', selecionado_rj.loc[selecionado_rj['dias_apos_prazo'] > 30]),
+]:
+    for intervalo, inicio, fim in [
+        ('Compra → aprovação', 'order_purchase_timestamp', 'order_approved_at'),
+        ('Aprovação → transportador', 'order_approved_at', 'order_delivered_carrier_date'),
+        ('Transportador → cliente', 'order_delivered_carrier_date', 'order_delivered_customer_date'),
+        ('Compra → cliente', 'order_purchase_timestamp', 'order_delivered_customer_date'),
+        ('Compra → promessa', 'order_purchase_timestamp', 'order_estimated_delivery_date'),
+    ]:
+        dias = (pd.to_datetime(dados_recorte[fim]) - pd.to_datetime(dados_recorte[inicio])).dt.total_seconds() / 86400
+        validos = dias.loc[dias >= 0]
+        linhas_intervalos.append(dict(recorte=recorte, intervalo=intervalo, total_pedidos=len(dias), validos=len(validos), ausentes=int(dias.isna().sum()), negativos=int((dias < 0).sum()), mediana_dias=validos.median(), percentil_90_dias=validos.quantile(.9)))
+resumo_intervalos_recortes = pd.DataFrame(linhas_intervalos).set_index(['recorte', 'intervalo'])
+
 # print(
 #     resumo_estados.sort_values(
 #         'taxa_atraso', ascending=False

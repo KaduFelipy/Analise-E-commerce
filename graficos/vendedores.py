@@ -1,6 +1,7 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from graficos.formatacao import brasileiro, contextualizar
 
 
 def criar_grafico_vendedores(pedidos_analisados, resumo_vendedores):
@@ -30,7 +31,7 @@ def criar_grafico_vendedores(pedidos_analisados, resumo_vendedores):
     ax = eixos[0]
 
     barras = ax.barh(
-        ranking.index,
+        ranking['rotulo'],
         ranking["pedidos_atrasados"],
         color="#287D8E",
     )
@@ -46,20 +47,21 @@ def criar_grafico_vendedores(pedidos_analisados, resumo_vendedores):
     ax = eixos[1]
 
     barras = ax.barh(
-        ranking.index,
+        ranking['rotulo'],
         ranking["taxa_atraso"],
         color="#C45136",
     )
 
     rotulos = [
-        f"{taxa:.2f}% | {pedidos} pedidos avaliados"
+        f"{brasileiro(taxa)}% | {brasileiro(pedidos, 0)} avaliáveis"
         for taxa, pedidos in zip(
             ranking["taxa_atraso"],
             ranking["pedidos_avaliados"],
         )
     ]
 
-    ax.bar_label(barras, labels=rotulos, padding=4, fontsize=8)
+    for y, rotulo in enumerate(rotulos):
+        ax.text(ranking['taxa_atraso'].max() * 1.05, y, rotulo, va='center', fontsize=8, bbox={'facecolor': 'white', 'edgecolor': 'none', 'pad': 1})
     ax.set_xlim(0, ranking["taxa_atraso"].max() * 1.8)
     ax.set_title("Taxa de atraso dos mesmos vendedores")
     ax.set_xlabel("Pedidos atrasados / pedidos avaliados (%)")
@@ -80,6 +82,7 @@ def criar_grafico_vendedores(pedidos_analisados, resumo_vendedores):
 
     caminho_imagem = pasta_imagens / "grafico_vendedores.png"
 
+    contextualizar(fig, f"{pedidos_analisados['order_purchase_timestamp'].min():%m/%Y}–{pedidos_analisados['order_purchase_timestamp'].max():%m/%Y}")
     fig.savefig(caminho_imagem, dpi=150, bbox_inches="tight")
     plt.close(fig)
 

@@ -1,120 +1,41 @@
-from pathlib import Path
+﻿from pathlib import Path
 
 import matplotlib.pyplot as plt
 
+from graficos.formatacao import brasileiro, contextualizar
 
-def criar_grafico_satisfacao_fidelizacao(
-    resumo_satisfacao,
-    resumo_recorrencia,
-):
-    satisfacao = resumo_satisfacao.reindex([False, True])
-    recorrencia = resumo_recorrencia.reindex([False, True])
 
-    assert satisfacao["nota_media"].notna().all()
-    assert recorrencia[
-        ["ticket_medio", "valor_por_cliente"]
-    ].notna().all().all()
-
-    fig, eixos = plt.subplots(
-        3, 1,
-        figsize=(12, 12),
-        layout="constrained",
-    )
-
-    fig.suptitle(
-        "Satisfação e recorrência de compra",
-        fontsize=17,
-    )
-
-    # Avaliações dos pedidos com nota disponível.
-    ax = eixos[0]
-
-    barras = ax.bar(
-        ["No prazo", "Atrasados"],
-        satisfacao["nota_media"].to_numpy(),
-        color=["#287D8E", "#C45136"],
-        width=0.5,
-    )
-
-    rotulos_notas = [
-        f"{nota:.2f} | {quantidade} pedidos avaliados"
-        for nota, quantidade in zip(
-            satisfacao["nota_media"],
-            satisfacao["pedidos_com_nota"],
-        )
-    ]
-
-    ax.bar_label(barras, labels=rotulos_notas, padding=5)
-    ax.set_ylim(0, 5.7)
-    ax.set_yticks([1, 2, 3, 4, 5])
-    ax.set_ylabel("Nota média")
-    ax.set_title("Pedidos atrasados receberam avaliações menores")
-
-    # Participação somente do grupo recorrente.
-    ax = eixos[1]
-
-    participacoes = [
-        recorrencia.loc[True, "participacao_clientes"],
-        recorrencia.loc[True, "participacao_valor"],
-    ]
-
-    barras = ax.bar(
-        ["Entre os clientes", "No valor vendido"],
-        participacoes,
-        color=["#287D8E", "#C45136"],
-        width=0.5,
-    )
-
-    ax.bar_label(barras, padding=5, fmt="%.2f%%")
-    ax.set_ylim(0, max(participacoes) * 1.4)
-    ax.set_ylabel("Participação (%)")
-    ax.set_title(
-        "Recorrentes representam 3% dos clientes e 5,51% do valor vendido"
-    )
-
-    # Comparação entre valor por pedido e valor por cliente.
-    ax = eixos[2]
-
-    barras_ticket = ax.bar(
-        [-0.18, 0.82],
-        recorrencia["ticket_medio"].to_numpy(),
-        width=0.36,
-        color="#287D8E",
-        label="Ticket médio por pedido",
-    )
-
-    barras_cliente = ax.bar(
-        [0.18, 1.18],
-        recorrencia["valor_por_cliente"].to_numpy(),
-        width=0.36,
-        color="#C45136",
-        label="Valor acumulado por cliente",
-    )
-
-    ax.bar_label(barras_ticket, padding=4, fmt="%.2f")
-    ax.bar_label(barras_cliente, padding=4, fmt="%.2f")
-    ax.set_xticks(
-        [0, 1],
-        ["Uma compra entregue", "Duas ou mais compras entregues"],
-    )
-    ax.set_ylim(
-        0,
-        recorrencia[["ticket_medio", "valor_por_cliente"]]
-        .max()
-        .max() * 1.35,
-    )
-    ax.set_ylabel("Valor dos produtos (R$, sem frete)")
-    ax.set_title("A repetição de compras aumenta o valor acumulado por cliente")
-    ax.legend(loc="upper left")
-
-    pasta_imagens = (
-        Path(__file__).resolve().parent.parent / "web" / "imagens"
-    )
-    pasta_imagens.mkdir(parents=True, exist_ok=True)
-
-    caminho_imagem = pasta_imagens / "grafico_satisfacao_fidelizacao.png"
-
-    fig.savefig(caminho_imagem, dpi=150, bbox_inches="tight")
+def criar_grafico_satisfacao_fidelizacao(resumo_satisfacao, resumo_recorrencia, resumo_recompra, resumo_momento):
+    pasta = Path(__file__).resolve().parent.parent / 'web' / 'imagens'
+    pasta.mkdir(parents=True, exist_ok=True)
+    caminhos = []
+    fig, ax = plt.subplots(figsize=(11, 6), layout='constrained')
+    dados = resumo_momento.reset_index()
+    rotulos = [('Atrasado' if r.atrasados else 'No prazo') + '\n' + r.recorte_resposta.replace(', ', '\n') for r in dados.itertuples()]
+    barras = ax.barh(rotulos, dados['nota_media'], color=['#C45136' if v else '#287D8E' for v in dados['atrasados']])
+    ax.bar_label(barras, labels=[f'{brasileiro(r.nota_media)} | n={brasileiro(r.pedidos, 0)}' for r in dados.itertuples()], padding=4)
+    ax.set_xlim(0, 6.2)
+    ax.set_xticks([0, 1, 2, 3, 4, 5])
+    ax.set_xlabel('Nota média por pedido e recorte (escala 1–5); n = pedidos')
+    principais = resumo_momento.loc[True]
+    ax.set_title(f'Pedidos atrasados: espera após prazo {brasileiro(principais.loc["Antes da entrega, após o dia prometido", "nota_media"])} vs. entrega/depois {brasileiro(principais.loc["Na entrega ou depois", "nota_media"])}')
+    contextualizar(fig, '09/2016–08/2018; prazo avaliável; pedidos podem aparecer em vários recortes')
+    caminho = pasta / 'grafico_satisfacao_fidelizacao.png'
+    fig.savefig(caminho, dpi=150, bbox_inches='tight')
     plt.close(fig)
+    caminhos.append(caminho)
 
-    return caminho_imagem
+    fig, eixos = plt.subplots(1, 1, figsize=(10, 4), layout='constrained')
+    valores = resumo_recompra[['multiplos_pedidos', 'outro_dia']]
+    barras = eixos.barh(['Múltiplos pedidos entregues', 'Compras em dias diferentes'], valores, color='#287D8E')
+    eixos.bar_label(barras, labels=[brasileiro(v, 0) for v in valores], padding=4)
+    eixos.set_xlim(0, valores.max() * 1.25)
+    eixos.set_xlabel('Clientes distintos; indicadores diferentes')
+    eixos.set_title('Múltiplos pedidos não demonstram retorno em outro dia')
+    contextualizar(fig, '09/2016–08/2018; pedidos entregues; cobertura não comprova completude')
+    caminho = pasta / 'grafico_recompra.png'
+    fig.savefig(caminho, dpi=150, bbox_inches='tight')
+    plt.close(fig)
+    caminhos.append(caminho)
+    return caminhos
+

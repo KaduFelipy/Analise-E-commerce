@@ -1,993 +1,2565 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise de entregas - Olist</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <main>
-        <header>
-            <p>ANÁLISE DE ENTREGAS — OLIST</p>
-            <h1>Onde investigar para reduzir os atrasos?</h1>
-            <p>
-                A maior taxa de atraso nem sempre representa a maior
-                quantidade de pedidos afetados. Para definir prioridades,
-                precisamos relacionar frequência, duração e volume.
-            </p>
-        </header>
-
-        <section>
-            <h2>1. Qual é o tamanho do problema?</h2>
-
-            <div class="indicadores">
-                <div class="indicador">
-                    <strong>96.470</strong>
-                    <span>entregas analisadas</span>
-                </div>
-
-                <div class="indicador">
-                    <strong>6.534</strong>
-                    <span>pedidos atrasados</span>
-                </div>
-
-                <div class="indicador">
-                    <strong>6,77%</strong>
-                    <span>taxa de atraso</span>
-                </div>
-            </div>
-
-            <p>
-                Entre os pedidos entregues com as duas datas preenchidas,
-                6,77% chegaram após o dia prometido. A taxa mostra a frequência
-                do problema, mas não revela a duração da espera adicional.
-            </p>
-        </section>
-
-        <section>
-            <h2>2. Quanto tempo os clientes esperaram além do prazo?</h2>
-
-            <p>
-                Entre os pedidos atrasados, o atraso médio foi de
-                <strong>10,62 dias</strong>. A mediana foi de
-                <strong>7 dias</strong>: pelo menos metade desses pedidos
-                teve atraso de até sete dias.
-            </p>
-
-            <p>
-                O maior atraso registrado foi de 188 dias. A média acima
-                da mediana sugere influência de atrasos mais longos,
-                que precisam ser investigados antes de qualquer exclusão.
-            </p>
-        </section>
-
-        <section>
-            <h2>3. O que os gráficos mostram?</h2>
-
-            <figure>
-                <a href="imagens/grafico_entregas.png" target="_blank" rel="noopener">
-                    <img src="imagens/grafico_entregas.png" alt="Quatro gráficos mostram a quantidade de entregas
-                        no prazo e atrasadas, a distribuição dos dias de atraso
-                        e a quantidade e a taxa de atraso por estado de destino.">
-                </a>
-
-                <figcaption>
-                    Clique na imagem para ampliar. Compare os dois gráficos
-                    estaduais: quantidade de atrasos e taxa de atraso
-                    respondem a perguntas diferentes.
-                </figcaption>
-            </figure>
-        </section>
-
-        <section>
-            <h2>4. Onde estão as diferentes prioridades?</h2>
-
-            <div class="tabela">
-                <table>
-                    <caption>Três estados que ilustram a diferença entre taxa e volume</caption>
-                    <thead>
-                        <tr>
-                            <th scope="col">Destino</th>
-                            <th scope="col">Entregas analisadas</th>
-                            <th scope="col">Atrasados</th>
-                            <th scope="col">Taxa de atraso</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">Alagoas</th>
-                            <td>397</td>
-                            <td>85</td>
-                            <td>21,41%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Rio de Janeiro</th>
-                            <td>12.350</td>
-                            <td>1.495</td>
-                            <td>12,11%</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">São Paulo</th>
-                            <td>40.494</td>
-                            <td>1.820</td>
-                            <td>4,49%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p>
-                <strong>Alagoas</strong> apresenta a maior taxa de atraso.
-                <strong>São Paulo</strong> concentra a maior quantidade,
-                mesmo com taxa abaixo da geral. O
-                <strong>Rio de Janeiro</strong> combina volume elevado
-                com taxa acima da referência de 6,77%.
-            </p>
-
-            <p>
-                Em um cenário ilustrativo, eliminar todos os 85 atrasos
-                de Alagoas evitaria menos casos do que reduzir em 10%
-                os atrasos do Rio de Janeiro: aproximadamente 150 pedidos.
-                Essa comparação mostra a diferença de escala,
-                sem indicar qual melhoria seria mais fácil de executar.
-            </p>
-        </section>
-
-        <section class="conclusao">
-            <h2>5. Que decisão esta análise orienta?</h2>
-
-            <p>
-                Para reduzir a quantidade total de atrasos, vale iniciar
-                uma investigação detalhada em São Paulo e no Rio de Janeiro.
-                Alagoas merece uma investigação específica pela elevada
-                proporção de entregas atrasadas.
-            </p>
-
-            <ul>
-                <li>
-                    Separar os resultados por mês e vendedor para localizar
-                    concentrações.
-                </li>
-                <li>
-                    Examinar os tempos entre compra, aprovação, envio e entrega.
-                </li>
-                <li>
-                    Comparar o prazo prometido com o tempo real de entrega.
-                </li>
-                <li>
-                    Avaliar causas, esforço e quantidade de atrasos evitáveis
-                    antes de escolher uma intervenção.
-                </li>
-            </ul>
-
-            <p>
-                A análise orienta onde investigar. Ainda não demonstra
-                necessidade de contratar pessoas ou trocar transportadoras.
-            </p>
-        </section>
-
-        <section id="vendas">
-            <h2>Desempenho de vendas</h2>
-
-            <p>
-                Como o valor vendido evoluiu? Quais categorias mais contribuíram?
-                O crescimento veio acompanhado de mais pedidos ou de maior
-                valor por compra?
-            </p>
-
-            <p>
-                Nesta análise, consideramos os preços dos produtos de pedidos
-                com status delivered, sem incluir o frete. Os meses são definidos
-                pela data da compra.
-            </p>
-
-            <div class="indicadores">
-                <div class="indicador">
-                    <strong>R$ 13.221.498,11</strong>
-                    <span>valor dos produtos em toda a base selecionada</span>
-                </div>
-
-                <div class="indicador">
-                    <strong>96.478</strong>
-                    <span>pedidos entregues</span>
-                </div>
-
-                <div class="indicador">
-                    <strong>110.197</strong>
-                    <span>itens vendidos</span>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>1. O maior crescimento não foi o maior valor vendido</h2>
-
-            <p>
-                Entre fevereiro de 2017 e julho de 2018,
-                <strong>março de 2017 apresentou o maior crescimento mensal:
-                    53,36%</strong> em relação a fevereiro.
-            </p>
-
-            <p>
-                Já <strong>novembro de 2017 atingiu o maior valor vendido</strong>,
-                com R$ 987.765,37 e 7.289 pedidos. Em dezembro, o valor vendido
-                caiu 26,50% em relação a novembro.
-            </p>
-
-            <figure>
-                <a href="imagens/grafico_vendas_mensais.png" target="_blank" rel="noopener">
-                    <img src="imagens/grafico_vendas_mensais.png" alt="Três gráficos mensais apresentam valor vendido,
-                quantidade de pedidos e ticket médio, de fevereiro
-                de 2017 a julho de 2018.">
-                </a>
-
-                <figcaption>
-                    Clique para ampliar. Compare o mesmo mês nos três painéis
-                    para relacionar valor vendido, volume e ticket médio.
-                </figcaption>
-            </figure>
-        </section>
-
-        <section>
-            <h2>2. Mais pedidos podem compensar um ticket menor</h2>
-
-            <p>
-                Abril de 2017 teve o maior ticket médio do período comparável:
-                <strong>R$ 147,92</strong>. Julho apresentou o menor:
-                <strong>R$ 124,38</strong>.
-            </p>
-
-            <div class="tabela">
-                <table>
-                    <caption>
-                        Comparação entre abril e julho de 2017
-                    </caption>
-
-                    <thead>
-                        <tr>
-                            <th scope="col">Indicador</th>
-                            <th scope="col">Abril de 2017</th>
-                            <th scope="col">Julho de 2017</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <th scope="row">Valor vendido</th>
-                            <td>R$ 340.669,68</td>
-                            <td>R$ 481.604,52</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Pedidos</th>
-                            <td>2.303</td>
-                            <td>3.872</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Ticket médio</th>
-                            <td>R$ 147,92</td>
-                            <td>R$ 124,38</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p>
-                Julho registrou maior valor vendido que abril,
-                mesmo com ticket menor, porque teve mais pedidos.
-                Novembro também liderou em valor vendido sem apresentar
-                o maior ticket médio.
-            </p>
-
-            <p>
-                <strong>
-                    Valor vendido = quantidade de pedidos × ticket médio.
-                </strong>
-                Por isso, o ticket deve ser interpretado junto do volume.
-            </p>
-        </section>
-
-        <section>
-            <h2>3. Quais categorias mais contribuem?</h2>
-
-            <p>
-                Considerando toda a base de pedidos entregues,
-                <strong>beleza e saúde liderou em valor vendido</strong>,
-                com R$ 1.233.131,72, equivalentes a 9,33% do total.
-            </p>
-
-            <div class="tabela">
-                <table>
-                    <caption>
-                        Três categorias com maior participação no valor vendido
-                    </caption>
-
-                    <thead>
-                        <tr>
-                            <th scope="col">Categoria</th>
-                            <th scope="col">Valor vendido</th>
-                            <th scope="col">Participação</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <th scope="row">Beleza e saúde</th>
-                            <td>R$ 1.233.131,72</td>
-                            <td>9,33%</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Relógios e presentes</th>
-                            <td>R$ 1.166.176,98</td>
-                            <td>8,82%</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Cama, mesa e banho</th>
-                            <td>R$ 1.023.434,76</td>
-                            <td>7,74%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p>
-                Outros R$ 170.726,63, ou 1,29% do total, estão associados
-                a itens sem categoria cadastrada. Esses valores foram
-                preservados no grupo “Sem categoria”.
-            </p>
-        </section>
-
-        <section class="conclusao">
-            <h2>4. Como usar esses resultados na gestão?</h2>
-
-            <p>
-                Acompanhar apenas o valor vendido pode esconder movimentos
-                diferentes. Uma mudança pode estar associada ao número
-                de pedidos, ao ticket médio ou a ambos.
-            </p>
-
-            <ul>
-                <li>
-                    Diante de uma queda no valor vendido, verificar primeiro
-                    a quantidade de pedidos e o ticket médio.
-                </li>
-
-                <li>
-                    Investigar os períodos de maior oscilação antes de atribuir
-                    o resultado a campanhas, promoções ou datas comemorativas.
-                </li>
-
-                <li>
-                    Acompanhar as categorias de maior participação, sem confundir
-                    valor vendido com margem ou lucro.
-                </li>
-
-                <li>
-                    Revisar o cadastro dos produtos sem categoria para melhorar
-                    a classificação, preservando seus valores na análise.
-                </li>
-            </ul>
-
-            <p>
-                <strong>
-                    O maior ticket não garante o maior valor vendido.
-                    O desempenho precisa ser lido junto do volume de pedidos.
-                </strong>
-            </p>
-        </section>
-
-        <section>
-            <h2>Critérios e limites da análise de vendas</h2>
-
-            <ul>
-                <li>
-                    Os totais e as participações das categorias utilizam toda
-                    a base selecionada de pedidos entregues.
-                </li>
-
-                <li>
-                    A comparação mensal principal considera fevereiro de 2017
-                    a julho de 2018. Os meses das extremidades apresentam
-                    limitações de cobertura.
-                </li>
-
-                <li>
-                    O ticket médio divide o valor dos produtos pela quantidade
-                    de pedidos distintos, e não pela quantidade de itens.
-                </li>
-
-                <li>
-                    O valor vendido não inclui frete e não representa
-                    lucro ou receita líquida.
-                </li>
-
-                <li>
-                    Não foram investigadas as causas das oscilações nem
-                    a contribuição das categorias em cada mês.
-                </li>
-            </ul>
-        </section>
-
-        <section id="geografia">
-            <h2>Distribuição geográfica das vendas e do frete</h2>
-
-            <p>
-                <strong>São Paulo lidera em clientes e valor vendido.
-                    Roraima tem a maior proporção de frete.</strong>
-                Os dois resultados ajudam a identificar prioridades comerciais
-                e logísticas entre os pedidos entregues.
-            </p>
-
-            <figure>
-                <a href="imagens/grafico_geografia.png" target="_blank" rel="noopener">
-                    <img src="imagens/grafico_geografia.png" alt="São Paulo lidera em clientes e valor vendido.
-                Roraima lidera em proporção de frete, com 28,08% em 41 pedidos.">
-                </a>
-
-                <figcaption>
-                    Cada painel mostra os cinco primeiros estados em seu indicador.
-                    No painel de frete, o rótulo mostra quantos pedidos compõem
-                    o resultado de cada estado. Clique para ampliar.
-                </figcaption>
-            </figure>
-
-            <h3>Onde se concentram clientes e vendas?</h3>
-
-            <p>
-                São Paulo liderou com <strong>39.156 clientes distintos</strong>
-                e <strong>R$ 5.067.633,16 em produtos vendidos</strong>.
-                Rio de Janeiro, Minas Gerais, Rio Grande do Sul e Paraná
-                completaram os cinco primeiros, na mesma ordem nos dois rankings.
-            </p>
-
-            <h3>Onde o frete tem maior peso?</h3>
-
-            <p>
-                Em Roraima, o frete somou <strong>R$ 28,08 para cada R$ 100
-                    em produtos</strong>, considerando 41 pedidos. No Maranhão,
-                foram <strong>R$ 26,32 para cada R$ 100</strong>, em 717 pedidos.
-                O Maranhão combina uma proporção próxima à de Roraima
-                com mais pedidos no período analisado.
-            </p>
-
-            <h3>Como usar esses resultados?</h3>
-
-            <p>
-                Para acompanhar as vendas, observe os estados que concentram
-                clientes e valor vendido. Para investigar o peso do frete,
-                compare o percentual junto da quantidade de pedidos e examine
-                separadamente o frete e o valor dos produtos.
-            </p>
-
-            <p>
-                <strong>Critério:</strong> foram considerados pedidos entregues,
-                agrupados pelo estado de destino. A proporção de frete foi
-                calculada dividindo o frete total pelo valor total dos produtos
-                em cada estado.
-            </p>
-        </section>
-
-        <section id="vendedores">
-            <h2>Entregas e desempenho dos vendedores</h2>
-
-            <p>
-                <strong>93,23% dos pedidos analisados chegaram no prazo.</strong>
-                Para direcionar a investigação dos atrasos, comparamos
-                a quantidade de pedidos afetados e a taxa de atraso
-                associada a cada vendedor.
-            </p>
-
-            <div class="indicadores">
-                <div class="indicador">
-                    <strong>96.470</strong>
-                    <span>pedidos com prazo avaliável</span>
-                </div>
-
-                <div class="indicador">
-                    <strong>89.936</strong>
-                    <span>pedidos entregues no prazo</span>
-                </div>
-
-                <div class="indicador">
-                    <strong>93,23%</strong>
-                    <span>taxa de entregas no prazo</span>
-                </div>
-            </div>
-
-            <h3>As maiores taxas aparecem em vendedores com poucos pedidos</h3>
-
-            <p>
-                Os dez primeiros vendedores do ranking por taxa apresentaram
-                100% de atraso. Cada um, porém, tinha somente um ou dois
-                pedidos avaliados. Esses volumes precisam acompanhar
-                os percentuais para que a gestão interprete sua dimensão.
-            </p>
-
-            <h3>O ranking por quantidade revela outra prioridade</h3>
-
-            <p>
-                Ao ordenar pela quantidade de pedidos atrasados,
-                o primeiro vendedor reuniu <strong>172 atrasos entre
-                    1.772 pedidos avaliados</strong>, com taxa de
-                <strong>9,71%</strong>. A taxa ficou acima da referência
-                geral de 6,77%.
-            </p>
-
-            <figure>
-                <a href="imagens/grafico_vendedores.png" target="_blank" rel="noopener">
-                    <img src="imagens/grafico_vendedores.png" alt="Dez vendedores com mais pedidos associados a atrasos.
-                O primeiro apresenta 172 atrasos em 1.772 pedidos,
-                com taxa de 9,71%. Os painéis mostram quantidade e taxa
-                dos mesmos vendedores.">
-                </a>
-
-                <figcaption>
-                    Os vendedores aparecem na mesma ordem nos dois painéis.
-                    A linha tracejada marca a taxa geral de atraso de 6,77%.
-                    Clique na imagem para ampliar.
-                </figcaption>
-            </figure>
-
-            <h3>Volume e frequência precisam ser lidos juntos</h3>
-
-            <p>
-                Entre os dez vendedores apresentados, a maior taxa foi de
-                <strong>10,50%</strong>, correspondente a
-                <strong>118 atrasos em 1.124 pedidos</strong>.
-                Outro vendedor teve 96 atrasos em 1.819 pedidos,
-                com taxa de 5,28%, abaixo da referência geral.
-            </p>
-
-            <p>
-                Esses casos mostram por que a investigação deve combinar
-                quantidade de pedidos afetados, taxa de atraso e volume
-                de pedidos avaliados.
-            </p>
-        </section>
-
-        <section class="conclusao">
-            <h2>Como usar a comparação entre vendedores?</h2>
-
-            <p>
-                Os vendedores com muitos pedidos atrasados são candidatos
-                para aprofundar a investigação. Aqueles que também apresentam
-                taxas elevadas reúnem frequência e volume que merecem atenção.
-            </p>
-
-            <ul>
-                <li>
-                    Examinar os pedidos associados aos vendedores com mais atrasos.
-                </li>
-
-                <li>
-                    Verificar se os atrasos se concentram em determinados
-                    meses, destinos ou etapas do processo.
-                </li>
-
-                <li>
-                    Acompanhar taxa de atraso junto da quantidade de pedidos
-                    avaliados ao comparar os vendedores.
-                </li>
-            </ul>
-
-            <h3>Critérios da comparação</h3>
-
-            <p>
-                Foram considerados pedidos entregues com as datas real
-                e prometida preenchidas. Entregas realizadas no próprio
-                dia prometido foram consideradas no prazo.
-            </p>
-
-            <p>
-                Cada combinação de pedido e vendedor foi contada uma única vez,
-                mesmo quando o vendedor forneceu vários itens no pedido.
-                Foram identificadas 97.811 combinações para 96.470 pedidos distintos.
-            </p>
-
-            <p>
-                Pedidos com vários vendedores aparecem associados a cada um deles.
-                Por isso, a soma dos atrasos por vendedor pode contar o mesmo
-                pedido mais de uma vez. A classificação utiliza a entrega final
-                do pedido e orienta a investigação das causas.
-            </p>
-        </section>
-
-        <section id="satisfacao-fidelizacao">
-            <h2>Satisfação e recorrência de compra</h2>
-
-            <p>
-                <strong>Pedidos atrasados receberam avaliações menores.
-                    Clientes recorrentes acumularam maior valor em compras.</strong>
-                A análise reúne duas perspectivas da experiência do cliente:
-                a avaliação do pedido e a repetição de compras.
-            </p>
-
-            <figure>
-                <a href="imagens/grafico_satisfacao_fidelizacao.png" target="_blank" rel="noopener">
-                    <img src="imagens/grafico_satisfacao_fidelizacao.png" alt="Comparação das notas de pedidos no prazo e atrasados,
-                participação dos clientes recorrentes e comparação
-                do valor médio por pedido e por cliente.">
-                </a>
-
-                <figcaption>
-                    Clique para ampliar. As notas consideram pedidos com prazo
-                    avaliável e avaliação disponível. A recorrência considera
-                    clientes com pelo menos dois pedidos entregues na base.
-                </figcaption>
-            </figure>
-
-            <h3>Como o atraso se relaciona com as avaliações?</h3>
-
-            <p>
-                Os pedidos entregues no prazo receberam nota média de
-                <strong>4,29</strong>, enquanto os atrasados receberam
-                <strong>2,27</strong>. A diferença foi de aproximadamente
-                <strong>2,02 pontos</strong>.
-            </p>
-
-            <div class="tabela">
-                <table>
-                    <caption>Avaliações por situação da entrega</caption>
-
-                    <thead>
-                        <tr>
-                            <th scope="col">Situação</th>
-                            <th scope="col">Pedidos com nota</th>
-                            <th scope="col">Nota média</th>
-                            <th scope="col">Mediana</th>
-                            <th scope="col">Cobertura das avaliações</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <th scope="row">No prazo</th>
-                            <td>89.443</td>
-                            <td>4,29</td>
-                            <td>5</td>
-                            <td>99,45%</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Atrasados</th>
-                            <td>6.381</td>
-                            <td>2,27</td>
-                            <td>1</td>
-                            <td>97,66%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p>
-                A cobertura foi elevada nos dois grupos. Dos 96.470 pedidos
-                com prazo avaliável, 646 ficaram sem nota correspondente.
-                A diferença observada orienta uma investigação sobre a
-                experiência dos clientes afetados por atrasos.
-            </p>
-
-            <h3>Quanto os clientes recorrentes representam?</h3>
-
-            <p>
-                Entre os 93.358 clientes com pedidos entregues,
-                <strong>2.801 realizaram pelo menos duas compras</strong>.
-                Eles representam <strong>3,00% dos clientes</strong>
-                e contribuíram com <strong>5,51% do valor vendido</strong>.
-            </p>
-
-            <div class="tabela">
-                <table>
-                    <caption>
-                        Compras entregues dos clientes na base histórica
-                    </caption>
-
-                    <thead>
-                        <tr>
-                            <th scope="col">Grupo</th>
-                            <th scope="col">Clientes</th>
-                            <th scope="col">Pedidos</th>
-                            <th scope="col">Valor dos produtos</th>
-                            <th scope="col">Participação no valor</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <th scope="row">Uma compra entregue</th>
-                            <td>90.557</td>
-                            <td>90.557</td>
-                            <td>R$ 12.493.089,36</td>
-                            <td>94,49%</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Duas ou mais compras entregues</th>
-                            <td>2.801</td>
-                            <td>5.921</td>
-                            <td>R$ 728.408,75</td>
-                            <td>5,51%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h3>A contribuição aparece nas compras acumuladas</h3>
-
-            <p>
-                O ticket médio dos recorrentes foi de
-                <strong>R$ 123,02 por pedido</strong>. Entre os clientes
-                com uma única compra entregue, foi de
-                <strong>R$ 137,96</strong>.
-            </p>
-
-            <p>
-                Ao acumular várias compras, os recorrentes atingiram
-                <strong>R$ 260,05 em produtos por cliente</strong>,
-                em média. A leitura conjunta do ticket e do valor acumulado
-                permite acompanhar quanto cada pedido representa e quanto
-                o cliente comprou ao longo do período observado.
-            </p>
-        </section>
-
-        <section class="conclusao">
-            <h2>Como usar os resultados na gestão?</h2>
-
-            <ul>
-                <li>
-                    Acompanhar as avaliações dos pedidos atrasados e investigar
-                    os problemas relatados pelos clientes.
-                </li>
-
-                <li>
-                    Monitorar a participação dos clientes recorrentes,
-                    considerando quantidade de compras e valor acumulado.
-                </li>
-
-                <li>
-                    Avaliar ações de relacionamento com métricas de recompra,
-                    além do ticket médio por pedido.
-                </li>
-            </ul>
-
-            <h3>Critérios e limites</h3>
-
-            <p>
-                Pedidos com várias avaliações foram representados pela média
-                de suas notas. Cada pedido com nota disponível teve o mesmo
-                peso na comparação entre entregas no prazo e atrasadas.
-            </p>
-
-            <p>
-                Os clientes foram identificados por customer_unique_id.
-                A classificação de recorrência exige pelo menos dois pedidos
-                entregues distintos e considera somente o período disponível.
-                O valor dos recorrentes inclui todas as suas compras entregues
-                na base, inclusive a primeira, sem frete.
-            </p>
-
-            <p>
-                A comparação das notas mostra uma associação com o atraso.
-                Outros fatores ligados às avaliações ainda precisam ser
-                investigados. A relação entre atraso e decisão de voltar
-                a comprar também permanece sem avaliação.
-            </p>
-        </section>
-
-        <section id="pagamentos">
-            <h2>Comportamento de pagamento e parcelamento</h2>
-
-            <p>
-                <strong>O cartão de crédito concentrou 78,46% do valor pago.</strong>
-                No recorte de compras com pagamento único no cartão,
-                oito e dez parcelas se destacaram por combinar valores
-                elevados com milhares de pedidos.
-            </p>
-
-            <h3>Como os clientes pagam?</h3>
-
-            <div class="tabela">
-                <table>
-                    <caption>
-                        Formas de pagamento utilizadas nos pedidos entregues
-                    </caption>
-
-                    <thead>
-                        <tr>
-                            <th scope="col">Forma de pagamento</th>
-                            <th scope="col">Pedidos que utilizaram a forma</th>
-                            <th scope="col">Valor pago registrado</th>
-                            <th scope="col">Participação no valor pago</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <th scope="row">Cartão de crédito</th>
-                            <td>74.304</td>
-                            <td>R$ 12.101.094,88</td>
-                            <td>78,46%</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Boleto</th>
-                            <td>19.191</td>
-                            <td>R$ 2.769.932,58</td>
-                            <td>17,96%</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Voucher</th>
-                            <td>3.679</td>
-                            <td>R$ 343.013,19</td>
-                            <td>2,22%</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">Cartão de débito</th>
-                            <td>1.485</td>
-                            <td>R$ 208.421,12</td>
-                            <td>1,35%</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p>
-                Foram encontrados 100.756 registros de pagamento associados
-                a 96.477 pedidos entregues. Um mesmo pedido pode utilizar
-                várias formas de pagamento e aparecer em mais de uma linha
-                da tabela acima.
-            </p>
-
-            <h3>Como o parcelamento se relaciona com o valor da compra?</h3>
-
-            <p>
-                A comparação considerou <strong>71.841 pedidos</strong>
-                com um único registro de pagamento no cartão de crédito,
-                quantidade de parcelas válida e valor positivo.
-                Nesse recorte, o registro representa o valor total pago
-                pelo pedido.
-            </p>
-
-            <figure>
-                <a href="imagens/grafico_pagamentos.png" target="_blank" rel="noopener">
-                    <img src="imagens/grafico_pagamentos.png" alt="Gráficos mostram a participação das formas de pagamento,
-                a média e a mediana do valor das compras por quantidade
-                de parcelas e o número de pedidos em cada grupo.">
-                </a>
-
-                <figcaption>
-                    Clique para ampliar. O painel de quantidade de pedidos
-                    permite avaliar o volume que sustenta as médias
-                    e medianas de cada grupo de parcelamento.
-                </figcaption>
-            </figure>
-
-            <h3>Oito e dez parcelas se destacam na comparação</h3>
-
-            <div class="tabela">
-                <table>
-                    <caption>
-                        Grupos selecionados para interpretar o parcelamento
-                    </caption>
-
-                    <thead>
-                        <tr>
-                            <th scope="col">Parcelas</th>
-                            <th scope="col">Pedidos</th>
-                            <th scope="col">Valor médio da compra</th>
-                            <th scope="col">Valor mediano da compra</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>23.113</td>
-                            <td>R$ 100,37</td>
-                            <td>R$ 71,19</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">8</th>
-                            <td>4.061</td>
-                            <td>R$ 306,10</td>
-                            <td>R$ 211,89</td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">10</th>
-                            <td>5.024</td>
-                            <td>R$ 409,53</td>
-                            <td>R$ 238,05</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <p>
-                Os grupos de oito e dez parcelas apresentaram valores
-                médios e medianos elevados, sustentados por
-                <strong>4.061 e 5.024 pedidos</strong>, respectivamente.
-                A relação apresenta oscilações entre os grupos,
-                que permanecem visíveis no gráfico.
-            </p>
-        </section>
-
-        <section class="conclusao">
-            <h2>Conclusão da análise de pagamentos</h2>
-
-            <p>
-                O cartão de crédito foi a forma com maior participação
-                no valor pago registrado. No recorte de pedidos com
-                pagamento único no cartão, os resultados reforçam
-                a associação entre maior parcelamento e compras
-                de maior valor, com destaque para oito e dez parcelas.
-            </p>
-
-            <h3>Critérios e limites</h3>
-
-            <ul>
-                <li>
-                    A distribuição das formas de pagamento considera
-                    os registros associados a pedidos entregues.
-                </li>
-
-                <li>
-                    Um dos 96.478 pedidos entregues ficou sem registro
-                    correspondente na tabela de pagamentos.
-                </li>
-
-                <li>
-                    A comparação do parcelamento considera somente pedidos
-                    com um único registro de pagamento no cartão,
-                    parcelas iguais ou superiores a uma e valor positivo.
-                </li>
-
-                <li>
-                    O valor pago pode incluir frete. Os valores apresentados
-                    por quantidade de parcelas representam o total da compra.
-                </li>
-
-                <li>
-                    Os grupos possuem quantidades diferentes de pedidos.
-                    Alguns parcelamentos menos frequentes têm poucos registros.
-                </li>
-
-                <li>
-                    O efeito de oferecer mais parcelas sobre o valor comprado
-                    permanece sem avaliação.
-                </li>
-            </ul>
-        </section>
-
-        <footer>
-            <h2>Critérios e limites</h2>
-            <p>
-                Foram considerados pedidos com status delivered e datas
-                real e prometida preenchidas. Oito pedidos com esse status
-                ficaram fora do cálculo por ausência da data real.
-                Uma entrega no próprio dia prometido foi considerada no prazo.
-            </p>
-            <p>
-                Os estados representam o destino dos clientes, sem atribuição
-                de responsabilidade. A base é histórica e os resultados não
-                comprovam causas nem representam a operação atual.
-            </p>
-            <p>
-                Fonte:
-                <a href="https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce">
-                    Brazilian E-Commerce Public Dataset by Olist
-                </a>.
-            </p>
-        </footer>
-    </main>
-</body>
-
-</html>
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Olist: vendas, entregas e experiência do cliente</title><link rel="stylesheet" href="style.css"></head><body>
+<a class="pular" href="#conteudo">Pular para o conteúdo</a><header><p class="sobretitulo">Projeto Olist / Análise histórica</p><h1>Vendas, entregas e experiência do cliente</h1><p>Objetivo: localizar mudanças comerciais e grupos com atrasos para orientar investigações, sem atribuir causas que a base não permite demonstrar.</p><p>Compras entregues: 15/09/2016 a 29/08/2018. Fonte: CSVs locais Olist. Resultados descrevem essa extração histórica.</p>
+<p class="descoberta">RJ: fevereiro e março de 2018 reuniram 597 atrasos em 1.743 pedidos avaliáveis (34,25%). O episódio aparece nos dois meses.</p><p class="descoberta">Três categorias somam R$ 101.142,30 em reduções, equivalentes a 38,64% da queda líquida de R$ 261.732,18.</p><p class="descoberta">Entre pedidos finalmente atrasados: nota 1,63 durante a espera após o prazo (4.431 pedidos), contra 3,72 na entrega ou depois (1.908 pedidos). São grupos distintos com sobreposição; não representa evolução da nota do mesmo cliente.</p></header>
+<nav aria-label="Temas"><a href="#vendas">Vendas</a><a href="#entregas">Entregas</a><a href="#geografia">Destinos e vendedores</a><a href="#experiencia">Avaliações</a><a href="#recompra">Recompra</a><a href="#pagamentos">Pagamentos</a><a href="#prioridades">Prioridades</a></nav>
+<main id="conteudo"><section id="vendas"><p class="sobretitulo">01 / Contexto comercial</p><h2>Novembro → dezembro de 2017: menos pedidos e menor ticket</h2><p class="descoberta">Três categorias somam R$ 101.142,30 em reduções, equivalentes a 38,64% da queda líquida de R$ 261.732,18.</p><h3>Três maiores reduções, ordenadas pela diferença em reais; aumentos compensam parte da queda líquida</h3><div class="tabela" tabindex="0" role="region" aria-label="Três maiores reduções, ordenadas pela diferença em reais; aumentos compensam parte da queda líquida"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Categoria</th>
+      <th>Novembro (R$)</th>
+      <th>Dezembro (R$)</th>
+      <th>Diferença (R$)</th>
+      <th>Participacao queda</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cama, mesa e banho</td>
+      <td>87.957,63</td>
+      <td>50.081,16</td>
+      <td>-37.876,47</td>
+      <td>14,47%</td>
+    </tr>
+    <tr>
+      <td>Informática e acessórios</td>
+      <td>69.676,32</td>
+      <td>37.428,67</td>
+      <td>-32.247,65</td>
+      <td>12,32%</td>
+    </tr>
+    <tr>
+      <td>Móveis e decoração</td>
+      <td>62.091,27</td>
+      <td>31.073,09</td>
+      <td>-31.018,18</td>
+      <td>11,85%</td>
+    </tr>
+  </tbody>
+</table></div><p><a href="tabelas/categorias_principais.csv" download>Baixar a seleção (CSV)</a></p>
+<p>O valor dos produtos variou <strong>-26,50%</strong>, os pedidos -24,37% e o ticket -2,82%. O valor vendido é a soma dos preços dos itens entregues, sem frete; não representa lucro ou receita própria da plataforma.</p>
+<figure><a href="imagens/grafico_vendas_mensais.png"><img src="imagens/grafico_vendas_mensais.png" alt="Vendas, pedidos e ticket alinhados pelo mês da compra. Novembro e dezembro de 2017 estão destacados; meses de borda ficam fora da série comparável." loading="lazy"></a><figcaption>Vendas, pedidos e ticket alinhados pelo mês da compra. Novembro e dezembro de 2017 estão destacados; meses de borda ficam fora da série comparável.</figcaption></figure>
+<p>As maiores contribuições negativas vieram de Cama, mesa e banho, Informática e acessórios, Móveis e decoração. A tabela mantém também os aumentos, que compensam parte das reduções. Pedidos com categorias diferentes aparecem em mais de uma categoria e não devem ser somados como exclusivos.</p>
+<details><summary>Comparação e identidade do ticket: itens por pedido × preço médio por item</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 2. <a href="tabelas/comparacao_nov_dez.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Mês da compra</th>
+      <th>Valor vendido</th>
+      <th>Quantidade pedidos</th>
+      <th>Ticket (R$)</th>
+      <th>Quantidade itens</th>
+      <th>Itens por pedido</th>
+      <th>Preco medio item</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2017-11</td>
+      <td>987.765,37</td>
+      <td>7.289</td>
+      <td>135,51</td>
+      <td>8.475</td>
+      <td>1</td>
+      <td>116,55</td>
+    </tr>
+    <tr>
+      <td>2017-12</td>
+      <td>726.033,19</td>
+      <td>5.513</td>
+      <td>131,69</td>
+      <td>6.187</td>
+      <td>1</td>
+      <td>117,35</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<figure><a href="imagens/grafico_contribuicoes.png"><img src="imagens/grafico_contribuicoes.png" alt="Diferenças por categoria entre novembro e dezembro de 2017, incluindo aumentos e saldo das demais categorias. Todas as contribuições estão na tabela." loading="lazy"></a><figcaption>Diferenças por categoria entre novembro e dezembro de 2017, incluindo aumentos e saldo das demais categorias. Todas as contribuições estão na tabela.</figcaption></figure>
+<details><summary>Todas as contribuições por categoria (R$; dezembro menos novembro)</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 74. <a href="tabelas/contribuicoes_categorias.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Categoria</th>
+      <th>Novembro (R$)</th>
+      <th>Dezembro (R$)</th>
+      <th>Diferença (R$)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cama, mesa e banho</td>
+      <td>87.957,63</td>
+      <td>50.081,16</td>
+      <td>-37.876,47</td>
+    </tr>
+    <tr>
+      <td>Informática e acessórios</td>
+      <td>69.676,32</td>
+      <td>37.428,67</td>
+      <td>-32.247,65</td>
+    </tr>
+    <tr>
+      <td>Móveis e decoração</td>
+      <td>62.091,27</td>
+      <td>31.073,09</td>
+      <td>-31.018,18</td>
+    </tr>
+    <tr>
+      <td>Relógios e presentes</td>
+      <td>95.292,34</td>
+      <td>69.556,92</td>
+      <td>-25.735,42</td>
+    </tr>
+    <tr>
+      <td>Cool stuff</td>
+      <td>55.696,66</td>
+      <td>37.515,57</td>
+      <td>-18.181,09</td>
+    </tr>
+    <tr>
+      <td>Beleza saude</td>
+      <td>78.274,40</td>
+      <td>60.688,75</td>
+      <td>-17.585,65</td>
+    </tr>
+    <tr>
+      <td>Ferramentas jardim</td>
+      <td>44.275,18</td>
+      <td>26.795,69</td>
+      <td>-17.479,49</td>
+    </tr>
+    <tr>
+      <td>Telefonia</td>
+      <td>26.117,63</td>
+      <td>12.780,44</td>
+      <td>-13.337,19</td>
+    </tr>
+    <tr>
+      <td>Moveis escritorio</td>
+      <td>17.919,20</td>
+      <td>6.684,37</td>
+      <td>-11.234,83</td>
+    </tr>
+    <tr>
+      <td>Agro industria e comercio</td>
+      <td>13.932,49</td>
+      <td>5.291,70</td>
+      <td>-8.640,79</td>
+    </tr>
+    <tr>
+      <td>Utilidades domesticas</td>
+      <td>33.872,42</td>
+      <td>25.285,96</td>
+      <td>-8.586,46</td>
+    </tr>
+    <tr>
+      <td>Brinquedos</td>
+      <td>62.611,26</td>
+      <td>55.064,56</td>
+      <td>-7.546,70</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Categorias por mês: valores, itens e pedidos que contêm a categoria</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 1.273. <a href="tabelas/categorias_mensais.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Mês da compra</th>
+      <th>Categoria</th>
+      <th>Valor vendido</th>
+      <th>Itens</th>
+      <th>Pedidos com categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2016-09</td>
+      <td>Beleza saude</td>
+      <td>134,97</td>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Sem categoria</td>
+      <td>65,89</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Alimentos</td>
+      <td>79,90</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Audio</td>
+      <td>156,99</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Automotivo</td>
+      <td>1.128,26</td>
+      <td>8</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Bebes</td>
+      <td>1.371,17</td>
+      <td>11</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Beleza saude</td>
+      <td>3.439,25</td>
+      <td>40</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Brinquedos</td>
+      <td>4.106,50</td>
+      <td>24</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Cama, mesa e banho</td>
+      <td>478,99</td>
+      <td>8</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Climatizacao</td>
+      <td>1.349,29</td>
+      <td>8</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Consoles games</td>
+      <td>3.619,36</td>
+      <td>7</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>Cool stuff</td>
+      <td>1.046,10</td>
+      <td>7</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Contexto: fevereiro a julho de 2017 e 2018; poucos ciclos não demonstram sazonalidade</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 12. <a href="tabelas/contexto_anos.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Mês da compra</th>
+      <th>Valor vendido</th>
+      <th>Quantidade pedidos</th>
+      <th>Ticket (R$)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2017-02</td>
+      <td>234.223,40</td>
+      <td>1.653</td>
+      <td>141,70</td>
+    </tr>
+    <tr>
+      <td>2017-03</td>
+      <td>359.198,85</td>
+      <td>2.546</td>
+      <td>141,08</td>
+    </tr>
+    <tr>
+      <td>2017-04</td>
+      <td>340.669,68</td>
+      <td>2.303</td>
+      <td>147,92</td>
+    </tr>
+    <tr>
+      <td>2017-05</td>
+      <td>489.338,25</td>
+      <td>3.546</td>
+      <td>138,00</td>
+    </tr>
+    <tr>
+      <td>2017-06</td>
+      <td>421.923,37</td>
+      <td>3.135</td>
+      <td>134,58</td>
+    </tr>
+    <tr>
+      <td>2017-07</td>
+      <td>481.604,52</td>
+      <td>3.872</td>
+      <td>124,38</td>
+    </tr>
+    <tr>
+      <td>2018-02</td>
+      <td>826.437,13</td>
+      <td>6.555</td>
+      <td>126,08</td>
+    </tr>
+    <tr>
+      <td>2018-03</td>
+      <td>953.356,25</td>
+      <td>7.003</td>
+      <td>136,14</td>
+    </tr>
+    <tr>
+      <td>2018-04</td>
+      <td>973.534,09</td>
+      <td>6.798</td>
+      <td>143,21</td>
+    </tr>
+    <tr>
+      <td>2018-05</td>
+      <td>977.544,69</td>
+      <td>6.749</td>
+      <td>144,84</td>
+    </tr>
+    <tr>
+      <td>2018-06</td>
+      <td>856.077,86</td>
+      <td>6.099</td>
+      <td>140,36</td>
+    </tr>
+    <tr>
+      <td>2018-07</td>
+      <td>867.953,46</td>
+      <td>6.159</td>
+      <td>140,92</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p><strong>Próximo passo:</strong> investigar disponibilidade e composição dos produtos nas categorias da queda. A variação observada não comprova mudança do preço do mesmo produto, campanha ou efeito de uma data comemorativa. Abril/julho permanece como exemplo didático nos documentos anteriores.</p></section><section id="entregas"><p class="sobretitulo">02 / Frequência e severidade</p><h2>SP e RJ concentram 50,73% dos atrasos</h2><p class="descoberta">RJ: fevereiro e março de 2018 reuniram 597 atrasos em 1.743 pedidos avaliáveis (34,25%). O episódio aparece nos dois meses.</p><p>Percentil 90: 90% dos atrasados tiveram atraso de até esse número de dias. Agosto/2018 é mês de borda; sua cobertura não comprova um mês completo.</p><h3>RJ lado a lado: mês da compra</h3><div class="tabela" tabindex="0" role="region" aria-label="RJ lado a lado: mês da compra"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>UF de destino</th>
+      <th>Mês da compra</th>
+      <th>Pedidos avaliaveis</th>
+      <th>Atrasados</th>
+      <th>Taxa atraso</th>
+      <th>Mediana</th>
+      <th>Percentil 90</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Rj</td>
+      <td>2018-02</td>
+      <td>879</td>
+      <td>299</td>
+      <td>34,02%</td>
+      <td>12,00</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>Rj</td>
+      <td>2018-03</td>
+      <td>864</td>
+      <td>298</td>
+      <td>34,49%</td>
+      <td>11,50</td>
+      <td>28</td>
+    </tr>
+  </tbody>
+</table></div><p><a href="tabelas/rj_fevereiro_marco.csv" download>Baixar a seleção (CSV)</a></p><p>Entre as três etapas dos atrasados do episódio, a maior mediana observada é em Transportador → cliente: 34,14 dias. Duração não identifica a causa do atraso. Medianas de etapas não devem ser somadas.</p><details><summary>Intervalos por recorte; grupos sobrepostos, sem soma entre grupos</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 20. <a href="tabelas/intervalos_recortes.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Recorte</th>
+      <th>Intervalo</th>
+      <th>Total pedidos</th>
+      <th>Validos</th>
+      <th>Ausentes</th>
+      <th>Negativos</th>
+      <th>Mediana dias</th>
+      <th>Percentil 90 dias</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Geral</td>
+      <td>Compra → aprovação</td>
+      <td>96.470</td>
+      <td>96.456</td>
+      <td>14</td>
+      <td>0</td>
+      <td>0,01</td>
+      <td>1,44</td>
+    </tr>
+    <tr>
+      <td>Geral</td>
+      <td>Aprovação → transportador</td>
+      <td>96.470</td>
+      <td>95.105</td>
+      <td>15</td>
+      <td>1.350</td>
+      <td>1,85</td>
+      <td>6,02</td>
+    </tr>
+    <tr>
+      <td>Geral</td>
+      <td>Transportador → cliente</td>
+      <td>96.470</td>
+      <td>96.446</td>
+      <td>1</td>
+      <td>23</td>
+      <td>7,10</td>
+      <td>18,90</td>
+    </tr>
+    <tr>
+      <td>Geral</td>
+      <td>Compra → cliente</td>
+      <td>96.470</td>
+      <td>96.470</td>
+      <td>0</td>
+      <td>0</td>
+      <td>10,22</td>
+      <td>23,10</td>
+    </tr>
+    <tr>
+      <td>Geral</td>
+      <td>Compra → promessa</td>
+      <td>96.470</td>
+      <td>96.470</td>
+      <td>0</td>
+      <td>0</td>
+      <td>23,23</td>
+      <td>34,29</td>
+    </tr>
+    <tr>
+      <td>Rj fev–mar/2018 no prazo</td>
+      <td>Compra → aprovação</td>
+      <td>1.146</td>
+      <td>1.146</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0,01</td>
+      <td>1,20</td>
+    </tr>
+    <tr>
+      <td>Rj fev–mar/2018 no prazo</td>
+      <td>Aprovação → transportador</td>
+      <td>1.146</td>
+      <td>1.145</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1,97</td>
+      <td>5,70</td>
+    </tr>
+    <tr>
+      <td>Rj fev–mar/2018 no prazo</td>
+      <td>Transportador → cliente</td>
+      <td>1.146</td>
+      <td>1.146</td>
+      <td>0</td>
+      <td>0</td>
+      <td>11,75</td>
+      <td>21,51</td>
+    </tr>
+    <tr>
+      <td>Rj fev–mar/2018 no prazo</td>
+      <td>Compra → cliente</td>
+      <td>1.146</td>
+      <td>1.146</td>
+      <td>0</td>
+      <td>0</td>
+      <td>14,42</td>
+      <td>25,50</td>
+    </tr>
+    <tr>
+      <td>Rj fev–mar/2018 no prazo</td>
+      <td>Compra → promessa</td>
+      <td>1.146</td>
+      <td>1.146</td>
+      <td>0</td>
+      <td>0</td>
+      <td>26,23</td>
+      <td>36,21</td>
+    </tr>
+    <tr>
+      <td>Rj fev–mar/2018 atrasados</td>
+      <td>Compra → aprovação</td>
+      <td>597</td>
+      <td>597</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0,01</td>
+      <td>1,14</td>
+    </tr>
+    <tr>
+      <td>Rj fev–mar/2018 atrasados</td>
+      <td>Aprovação → transportador</td>
+      <td>597</td>
+      <td>597</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2,24</td>
+      <td>6,63</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p>São 6.534 atrasos entre 96.470 pedidos avaliáveis (6,77%). O atraso compara o dia da entrega ao dia prometido. A mediana entre atrasados é 7 dias e o percentil 90 é 22 dias. Nenhum extremo foi removido.</p>
+<figure><a href="imagens/grafico_entregas.png"><img src="imagens/grafico_entregas.png" alt="Volume e taxa usam a mesma ordem estadual, por quantidade de atrasos; SP, RJ e AL têm destaque. As faixas de duração incluem todos os extremos." loading="lazy"></a><figcaption>Volume e taxa usam a mesma ordem estadual, por quantidade de atrasos; SP, RJ e AL têm destaque. As faixas de duração incluem todos os extremos.</figcaption></figure>
+<p>O maior volume mensal entre SP/RJ está em <strong>RJ / 2018-02</strong>: 299 atrasos em 879 entregas avaliáveis (34,02%). O mês é sempre o da compra.</p>
+<details><summary>Dez episódios com mais atrasos em SP/RJ; taxa e exposição</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 10. <a href="tabelas/episodios_sp_rj.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>UF de destino</th>
+      <th>Mês da compra</th>
+      <th>Pedidos avaliaveis</th>
+      <th>Atrasados</th>
+      <th>Taxa atraso</th>
+      <th>Mediana</th>
+      <th>Percentil 90</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Rj</td>
+      <td>2018-02</td>
+      <td>879</td>
+      <td>299</td>
+      <td>34,02%</td>
+      <td>12,00</td>
+      <td>36</td>
+    </tr>
+    <tr>
+      <td>Rj</td>
+      <td>2018-03</td>
+      <td>864</td>
+      <td>298</td>
+      <td>34,49%</td>
+      <td>11,50</td>
+      <td>28</td>
+    </tr>
+    <tr>
+      <td>Sp</td>
+      <td>2018-08</td>
+      <td>3.164</td>
+      <td>285</td>
+      <td>9,01%</td>
+      <td>3,00</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <td>Sp</td>
+      <td>2018-03</td>
+      <td>2.971</td>
+      <td>280</td>
+      <td>9,42%</td>
+      <td>5,00</td>
+      <td>16</td>
+    </tr>
+    <tr>
+      <td>Rj</td>
+      <td>2017-11</td>
+      <td>1.012</td>
+      <td>263</td>
+      <td>25,99%</td>
+      <td>10,00</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>Sp</td>
+      <td>2017-11</td>
+      <td>2.898</td>
+      <td>202</td>
+      <td>6,97%</td>
+      <td>5,00</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <td>Sp</td>
+      <td>2018-02</td>
+      <td>2.632</td>
+      <td>193</td>
+      <td>7,33%</td>
+      <td>7,00</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <td>Rj</td>
+      <td>2017-12</td>
+      <td>746</td>
+      <td>179</td>
+      <td>23,99%</td>
+      <td>8,00</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <td>Sp</td>
+      <td>2018-05</td>
+      <td>3.138</td>
+      <td>136</td>
+      <td>4,33%</td>
+      <td>4,00</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td>Rj</td>
+      <td>2018-01</td>
+      <td>850</td>
+      <td>111</td>
+      <td>13,06%</td>
+      <td>10,00</td>
+      <td>33</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Concentração SP/RJ em cada mês: episódios e persistência</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 23. <a href="tabelas/concentracao_mensal.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Mês da compra</th>
+      <th>Pedidos avaliaveis</th>
+      <th>Atrasados</th>
+      <th>Atrasados sp rj</th>
+      <th>Participacao sp rj</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2016-09</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>2016-10</td>
+      <td>265</td>
+      <td>2</td>
+      <td>2</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>2016-12</td>
+      <td>1</td>
+      <td>0</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>2017-01</td>
+      <td>750</td>
+      <td>22</td>
+      <td>11</td>
+      <td>50,00%</td>
+    </tr>
+    <tr>
+      <td>2017-02</td>
+      <td>1.653</td>
+      <td>49</td>
+      <td>26</td>
+      <td>53,06%</td>
+    </tr>
+    <tr>
+      <td>2017-03</td>
+      <td>2.546</td>
+      <td>116</td>
+      <td>38</td>
+      <td>32,76%</td>
+    </tr>
+    <tr>
+      <td>2017-04</td>
+      <td>2.303</td>
+      <td>151</td>
+      <td>82</td>
+      <td>54,30%</td>
+    </tr>
+    <tr>
+      <td>2017-05</td>
+      <td>3.545</td>
+      <td>106</td>
+      <td>71</td>
+      <td>66,98%</td>
+    </tr>
+    <tr>
+      <td>2017-06</td>
+      <td>3.135</td>
+      <td>95</td>
+      <td>55</td>
+      <td>57,89%</td>
+    </tr>
+    <tr>
+      <td>2017-07</td>
+      <td>3.872</td>
+      <td>108</td>
+      <td>45</td>
+      <td>41,67%</td>
+    </tr>
+    <tr>
+      <td>2017-08</td>
+      <td>4.193</td>
+      <td>122</td>
+      <td>50</td>
+      <td>40,98%</td>
+    </tr>
+    <tr>
+      <td>2017-09</td>
+      <td>4.150</td>
+      <td>182</td>
+      <td>79</td>
+      <td>43,41%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Todos os destinos e meses; duração ausente quando não há atraso</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 556. <a href="tabelas/estado_mes.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>UF de destino</th>
+      <th>Mês da compra</th>
+      <th>Pedidos avaliaveis</th>
+      <th>Atrasados</th>
+      <th>Taxa atraso</th>
+      <th>Mediana</th>
+      <th>Percentil 90</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Ac</td>
+      <td>2017-01</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-02</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-03</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-04</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-05</td>
+      <td>8</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-06</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-07</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-08</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-09</td>
+      <td>5</td>
+      <td>1</td>
+      <td>20,00%</td>
+      <td>24,00</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-10</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-11</td>
+      <td>5</td>
+      <td>1</td>
+      <td>20,00%</td>
+      <td>1,00</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <td>Ac</td>
+      <td>2017-12</td>
+      <td>5</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Indisponível</td>
+      <td>Indisponível</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Severidade: faixas exclusivas e participação nos atrasos</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 4. <a href="tabelas/faixas_atraso.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Faixa atraso</th>
+      <th>Pedidos</th>
+      <th>Participacao atrasados</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1–7</td>
+      <td>3.672</td>
+      <td>56,20%</td>
+    </tr>
+    <tr>
+      <td>8–15</td>
+      <td>1.637</td>
+      <td>25,05%</td>
+    </tr>
+    <tr>
+      <td>16–30</td>
+      <td>880</td>
+      <td>13,47%</td>
+    </tr>
+    <tr>
+      <td>Acima de 30</td>
+      <td>345</td>
+      <td>5,28%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Notas por severidade e momento da resposta; média por pedido dentro do recorte</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 12. <a href="tabelas/notas_faixas.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Faixa atraso</th>
+      <th>Recorte resposta</th>
+      <th>Pedidos</th>
+      <th>Registros</th>
+      <th>Nota média</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1–7</td>
+      <td>Antes da entrega, após o dia prometido</td>
+      <td>1.751</td>
+      <td>1.754</td>
+      <td>1,64</td>
+    </tr>
+    <tr>
+      <td>1–7</td>
+      <td>Antes da entrega, até o dia prometido</td>
+      <td>24</td>
+      <td>24</td>
+      <td>3,08</td>
+    </tr>
+    <tr>
+      <td>1–7</td>
+      <td>Na entrega ou depois</td>
+      <td>1.832</td>
+      <td>1.834</td>
+      <td>3,73</td>
+    </tr>
+    <tr>
+      <td>8–15</td>
+      <td>Antes da entrega, após o dia prometido</td>
+      <td>1.535</td>
+      <td>1.539</td>
+      <td>1,59</td>
+    </tr>
+    <tr>
+      <td>8–15</td>
+      <td>Antes da entrega, até o dia prometido</td>
+      <td>12</td>
+      <td>13</td>
+      <td>3,83</td>
+    </tr>
+    <tr>
+      <td>8–15</td>
+      <td>Na entrega ou depois</td>
+      <td>57</td>
+      <td>57</td>
+      <td>3,53</td>
+    </tr>
+    <tr>
+      <td>16–30</td>
+      <td>Antes da entrega, após o dia prometido</td>
+      <td>834</td>
+      <td>839</td>
+      <td>1,56</td>
+    </tr>
+    <tr>
+      <td>16–30</td>
+      <td>Antes da entrega, até o dia prometido</td>
+      <td>6</td>
+      <td>6</td>
+      <td>4,50</td>
+    </tr>
+    <tr>
+      <td>16–30</td>
+      <td>Na entrega ou depois</td>
+      <td>12</td>
+      <td>12</td>
+      <td>3,17</td>
+    </tr>
+    <tr>
+      <td>Acima de 30</td>
+      <td>Antes da entrega, após o dia prometido</td>
+      <td>311</td>
+      <td>313</td>
+      <td>2,00</td>
+    </tr>
+    <tr>
+      <td>Acima de 30</td>
+      <td>Antes da entrega, até o dia prometido</td>
+      <td>11</td>
+      <td>11</td>
+      <td>3,36</td>
+    </tr>
+    <tr>
+      <td>Acima de 30</td>
+      <td>Na entrega ou depois</td>
+      <td>7</td>
+      <td>7</td>
+      <td>2,43</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Intervalos logísticos (dias); ausências e sequências negativas separadas</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 3. <a href="tabelas/intervalos.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Index</th>
+      <th>Validos</th>
+      <th>Ausentes</th>
+      <th>Negativos</th>
+      <th>Mediana dias</th>
+      <th>Percentil 90 dias</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Compra → aprovação</td>
+      <td>96.456</td>
+      <td>14</td>
+      <td>0</td>
+      <td>0,01</td>
+      <td>1,44</td>
+    </tr>
+    <tr>
+      <td>Aprovação → transportador</td>
+      <td>95.105</td>
+      <td>15</td>
+      <td>1.350</td>
+      <td>1,85</td>
+      <td>6,02</td>
+    </tr>
+    <tr>
+      <td>Transportador → cliente</td>
+      <td>96.446</td>
+      <td>1</td>
+      <td>23</td>
+      <td>7,10</td>
+      <td>18,90</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p><strong>Investigação:</strong> examinar a sequência compra → aprovação → transportador → cliente nos episódios acima e nos casos com mais de 30 dias. Os intervalos não identificam isoladamente um responsável; custo, transportadora e viabilidade ainda precisam ser apurados.</p></section><section id="geografia"><p class="sobretitulo">03 / Exposição comercial e logística</p><h2>Volume, ticket e frete precisam ser lidos juntos</h2><p class="descoberta">Entre os cinco destinos de maior valor de produtos, RJ, MG, RS, PR combinam essa exposição com taxa de atraso ou proporção de frete acima da referência nacional.</p><h3>Seleção por valor dos produtos; Brasil calculado pelos totais</h3><div class="tabela" tabindex="0" role="region" aria-label="Seleção por valor dos produtos; Brasil calculado pelos totais"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>UF de destino</th>
+      <th>Participacao vendas</th>
+      <th>Pedidos avaliaveis</th>
+      <th>Taxa atraso</th>
+      <th>Ticket (R$)</th>
+      <th>Frete médio (R$)</th>
+      <th>Frete percentual</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sp</td>
+      <td>38,33%</td>
+      <td>40.494</td>
+      <td>4,49%</td>
+      <td>125,12</td>
+      <td>17,33</td>
+      <td>13,85%</td>
+    </tr>
+    <tr>
+      <td>Rj</td>
+      <td>13,31%</td>
+      <td>12.350</td>
+      <td>12,11%</td>
+      <td>142,48</td>
+      <td>23,95</td>
+      <td>16,81%</td>
+    </tr>
+    <tr>
+      <td>Mg</td>
+      <td>11,74%</td>
+      <td>11.354</td>
+      <td>4,57%</td>
+      <td>136,73</td>
+      <td>23,46</td>
+      <td>17,16%</td>
+    </tr>
+    <tr>
+      <td>Rs</td>
+      <td>5,51%</td>
+      <td>5.344</td>
+      <td>6,08%</td>
+      <td>136,37</td>
+      <td>24,80</td>
+      <td>18,19%</td>
+    </tr>
+    <tr>
+      <td>Pr</td>
+      <td>5,04%</td>
+      <td>4.923</td>
+      <td>4,04%</td>
+      <td>135,30</td>
+      <td>23,49</td>
+      <td>17,36%</td>
+    </tr>
+    <tr>
+      <td>Brasil</td>
+      <td>100,00%</td>
+      <td>96.470</td>
+      <td>6,77%</td>
+      <td>137,04</td>
+      <td>22,79</td>
+      <td>16,63%</td>
+    </tr>
+  </tbody>
+</table></div><p><a href="tabelas/destinos_principais.csv" download>Baixar a seleção (CSV)</a></p><p>Vendedores: 30.929 de 45.887 células mensais têm um pedido (67,40%). O complemento trimestral usa abril/2017–junho/2018 e dez vendedores selecionados por atrasos, com desempate por base e ID. Referência: demais vendedores da mesma UF/trimestre, sem o próprio vendedor.</p><details><summary>Complemento trimestral selecionado; contagens e pares completos no download</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 869. <a href="tabelas/vendedores_trimestral.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>ID do vendedor</th>
+      <th>UF de destino</th>
+      <th>Trimestre compra</th>
+      <th>Pedidos avaliaveis</th>
+      <th>Atrasados</th>
+      <th>Total</th>
+      <th>Atrasos total</th>
+      <th>Pedidos outros vendedores</th>
+      <th>Atrasados outros vendedores</th>
+      <th>Taxa atraso</th>
+      <th>Taxa outros vendedores</th>
+      <th>Rotulo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Al</td>
+      <td>2017q3</td>
+      <td>2</td>
+      <td>0</td>
+      <td>51</td>
+      <td>18</td>
+      <td>49</td>
+      <td>18</td>
+      <td>0,00%</td>
+      <td>36,73%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Al</td>
+      <td>2017q4</td>
+      <td>1</td>
+      <td>0</td>
+      <td>66</td>
+      <td>7</td>
+      <td>65</td>
+      <td>7</td>
+      <td>0,00%</td>
+      <td>10,77%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Al</td>
+      <td>2018q1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>89</td>
+      <td>31</td>
+      <td>88</td>
+      <td>31</td>
+      <td>0,00%</td>
+      <td>35,23%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Al</td>
+      <td>2018q2</td>
+      <td>2</td>
+      <td>1</td>
+      <td>69</td>
+      <td>9</td>
+      <td>67</td>
+      <td>8</td>
+      <td>50,00%</td>
+      <td>11,94%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Ba</td>
+      <td>2017q2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>302</td>
+      <td>24</td>
+      <td>300</td>
+      <td>24</td>
+      <td>0,00%</td>
+      <td>8,00%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Ba</td>
+      <td>2017q3</td>
+      <td>6</td>
+      <td>0</td>
+      <td>457</td>
+      <td>40</td>
+      <td>451</td>
+      <td>40</td>
+      <td>0,00%</td>
+      <td>8,87%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Ba</td>
+      <td>2017q4</td>
+      <td>22</td>
+      <td>4</td>
+      <td>585</td>
+      <td>76</td>
+      <td>563</td>
+      <td>72</td>
+      <td>18,18%</td>
+      <td>12,79%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Ba</td>
+      <td>2018q1</td>
+      <td>10</td>
+      <td>2</td>
+      <td>665</td>
+      <td>129</td>
+      <td>655</td>
+      <td>127</td>
+      <td>20,00%</td>
+      <td>19,39%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Ba</td>
+      <td>2018q2</td>
+      <td>9</td>
+      <td>1</td>
+      <td>638</td>
+      <td>98</td>
+      <td>629</td>
+      <td>97</td>
+      <td>11,11%</td>
+      <td>15,42%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Ce</td>
+      <td>2017q3</td>
+      <td>3</td>
+      <td>0</td>
+      <td>196</td>
+      <td>3</td>
+      <td>193</td>
+      <td>3</td>
+      <td>0,00%</td>
+      <td>1,55%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Ce</td>
+      <td>2017q4</td>
+      <td>10</td>
+      <td>2</td>
+      <td>244</td>
+      <td>36</td>
+      <td>234</td>
+      <td>34</td>
+      <td>20,00%</td>
+      <td>14,53%</td>
+      <td>Vendedor 359</td>
+    </tr>
+    <tr>
+      <td>1f50f920176fa81dab994f9023523100</td>
+      <td>Ce</td>
+      <td>2018q2</td>
+      <td>6</td>
+      <td>2</td>
+      <td>240</td>
+      <td>31</td>
+      <td>234</td>
+      <td>29</td>
+      <td>33,33%</td>
+      <td>12,39%</td>
+      <td>Vendedor 359</td>
+    </tr>
+  </tbody>
+</table></div></details><details><summary>Distribuição exata do tamanho das células selecionadas</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 90. <a href="tabelas/bases_trimestrais.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Pedidos avaliaveis</th>
+      <th>Celulas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>175</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>122</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>82</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>69</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>44</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>15</td>
+    </tr>
+  </tbody>
+</table></div></details><details><summary>Repetição descritiva acima da referência; sem comprovação estatística</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 10. <a href="tabelas/repeticao_vendedores.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Rotulo</th>
+      <th>Celulas</th>
+      <th>Acima referencia</th>
+      <th>Trimestres</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Vendedor 1191</td>
+      <td>104</td>
+      <td>24</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Vendedor 1481</td>
+      <td>91</td>
+      <td>25</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Vendedor 1645</td>
+      <td>68</td>
+      <td>19</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>Vendedor 1759</td>
+      <td>71</td>
+      <td>19</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Vendedor 2389</td>
+      <td>107</td>
+      <td>30</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Vendedor 2544</td>
+      <td>72</td>
+      <td>23</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Vendedor 2726</td>
+      <td>80</td>
+      <td>20</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Vendedor 359</td>
+      <td>93</td>
+      <td>28</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Vendedor 835</td>
+      <td>86</td>
+      <td>34</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Vendedor 859</td>
+      <td>97</td>
+      <td>36</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table></div></details><p>A fragmentação e a seleção não sustentam ordenar o desempenho de forma estável; taxas isoladas não identificam os piores vendedores.</p>
+<p>Vendas incluem 96.478 pedidos entregues; prazos usam 96.470 com datas válidas. Os oito pedidos sem prazo avaliável permanecem no total comercial. Frete é o valor registrado nos itens, sem evidência de custo logístico da empresa.</p>
+<figure><a href="imagens/grafico_geografia.png"><img src="imagens/grafico_geografia.png" alt="Participação nas vendas, ticket e frete nos destinos principais. A tabela inclui todas as UFs e os denominadores comerciais e logísticos." loading="lazy"></a><figcaption>Participação nas vendas, ticket e frete nos destinos principais. A tabela inclui todas as UFs e os denominadores comerciais e logísticos.</figcaption></figure>
+<details><summary>Todas as UFs: vendas, frete, ticket, atrasos e exposição</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 27. <a href="tabelas/geografia.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>UF de destino</th>
+      <th>Clientes distintos</th>
+      <th>Pedidos distintos</th>
+      <th>Produtos (R$)</th>
+      <th>Valor frete</th>
+      <th>Frete percentual</th>
+      <th>Pedidos avaliaveis</th>
+      <th>Pedidos atrasados</th>
+      <th>Taxa atraso</th>
+      <th>Participacao vendas</th>
+      <th>Ticket (R$)</th>
+      <th>Frete médio (R$)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sp</td>
+      <td>39.156</td>
+      <td>40.501</td>
+      <td>5.067.633,16</td>
+      <td>702.069,99</td>
+      <td>13,85%</td>
+      <td>40.494</td>
+      <td>1.820</td>
+      <td>4,49%</td>
+      <td>38,33%</td>
+      <td>125,12</td>
+      <td>17,33</td>
+    </tr>
+    <tr>
+      <td>Rj</td>
+      <td>11.917</td>
+      <td>12.350</td>
+      <td>1.759.651,13</td>
+      <td>295.750,44</td>
+      <td>16,81%</td>
+      <td>12.350</td>
+      <td>1.495</td>
+      <td>12,11%</td>
+      <td>13,31%</td>
+      <td>142,48</td>
+      <td>23,95</td>
+    </tr>
+    <tr>
+      <td>Mg</td>
+      <td>11.001</td>
+      <td>11.354</td>
+      <td>1.552.481,83</td>
+      <td>266.409,84</td>
+      <td>17,16%</td>
+      <td>11.354</td>
+      <td>519</td>
+      <td>4,57%</td>
+      <td>11,74%</td>
+      <td>136,73</td>
+      <td>23,46</td>
+    </tr>
+    <tr>
+      <td>Rs</td>
+      <td>5.168</td>
+      <td>5.345</td>
+      <td>728.897,47</td>
+      <td>132.575,32</td>
+      <td>18,19%</td>
+      <td>5.344</td>
+      <td>325</td>
+      <td>6,08%</td>
+      <td>5,51%</td>
+      <td>136,37</td>
+      <td>24,80</td>
+    </tr>
+    <tr>
+      <td>Pr</td>
+      <td>4.769</td>
+      <td>4.923</td>
+      <td>666.063,51</td>
+      <td>115.645,29</td>
+      <td>17,36%</td>
+      <td>4.923</td>
+      <td>199</td>
+      <td>4,04%</td>
+      <td>5,04%</td>
+      <td>135,30</td>
+      <td>23,49</td>
+    </tr>
+    <tr>
+      <td>Sc</td>
+      <td>3.449</td>
+      <td>3.546</td>
+      <td>507.012,13</td>
+      <td>88.115,65</td>
+      <td>17,38%</td>
+      <td>3.546</td>
+      <td>291</td>
+      <td>8,21%</td>
+      <td>3,83%</td>
+      <td>142,98</td>
+      <td>24,85</td>
+    </tr>
+    <tr>
+      <td>Ba</td>
+      <td>3.158</td>
+      <td>3.256</td>
+      <td>493.584,14</td>
+      <td>97.553,67</td>
+      <td>19,76%</td>
+      <td>3.256</td>
+      <td>396</td>
+      <td>12,16%</td>
+      <td>3,73%</td>
+      <td>151,59</td>
+      <td>29,96</td>
+    </tr>
+    <tr>
+      <td>Df</td>
+      <td>2.019</td>
+      <td>2.080</td>
+      <td>296.498,41</td>
+      <td>49.624,94</td>
+      <td>16,74%</td>
+      <td>2.080</td>
+      <td>118</td>
+      <td>5,67%</td>
+      <td>2,24%</td>
+      <td>142,55</td>
+      <td>23,86</td>
+    </tr>
+    <tr>
+      <td>Go</td>
+      <td>1.895</td>
+      <td>1.957</td>
+      <td>282.836,70</td>
+      <td>51.375,65</td>
+      <td>18,16%</td>
+      <td>1.957</td>
+      <td>128</td>
+      <td>6,54%</td>
+      <td>2,14%</td>
+      <td>144,53</td>
+      <td>26,25</td>
+    </tr>
+    <tr>
+      <td>Es</td>
+      <td>1.928</td>
+      <td>1.995</td>
+      <td>268.643,45</td>
+      <td>49.014,48</td>
+      <td>18,25%</td>
+      <td>1.995</td>
+      <td>214</td>
+      <td>10,73%</td>
+      <td>2,03%</td>
+      <td>134,66</td>
+      <td>24,57</td>
+    </tr>
+    <tr>
+      <td>Pe</td>
+      <td>1.551</td>
+      <td>1.593</td>
+      <td>251.889,49</td>
+      <td>57.082,56</td>
+      <td>22,66%</td>
+      <td>1.593</td>
+      <td>153</td>
+      <td>9,60%</td>
+      <td>1,91%</td>
+      <td>158,12</td>
+      <td>35,83</td>
+    </tr>
+    <tr>
+      <td>Ce</td>
+      <td>1.258</td>
+      <td>1.279</td>
+      <td>219.757,38</td>
+      <td>46.679,39</td>
+      <td>21,24%</td>
+      <td>1.279</td>
+      <td>176</td>
+      <td>13,76%</td>
+      <td>1,66%</td>
+      <td>171,82</td>
+      <td>36,50</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p><strong>Próximo passo:</strong> confrontar destinos de maior volume com taxa de atraso e proporção de frete antes de priorizar uma investigação. Um cliente pode aparecer em mais de um estado; a soma estadual de clientes não equivale necessariamente ao total nacional distinto.</p>
+<h3>Vendedores: associação ao atraso, com contexto de destino e período</h3>
+<figure><a href="imagens/grafico_vendedores.png"><img src="imagens/grafico_vendedores.png" alt="Dez vendedores com mais pedidos associados a atrasos, com taxa e quantidade avaliável. Referência nacional descritiva, sem ajuste de composição." loading="lazy"></a><figcaption>Dez vendedores com mais pedidos associados a atrasos, com taxa e quantidade avaliável. Referência nacional descritiva, sem ajuste de composição.</figcaption></figure>
+<p>O recorte complementar com vendedor único exclui 1.275 pedidos multivendedor. As células vendedor × destino × mês mantêm bases pequenas visíveis. Não há ranking ajustado: composição de produtos, operação e responsabilidade não foram controladas.</p>
+<details><summary>Correspondência dos rótulos aos IDs completos; todos os vendedores</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 2.970. <a href="tabelas/vendedores.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>ID do vendedor</th>
+      <th>Pedidos avaliados</th>
+      <th>Pedidos atrasados</th>
+      <th>Taxa atraso</th>
+      <th>Rotulo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0015a82c2db000af6aaaf3ae2ecb0532</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 1</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>195</td>
+      <td>12</td>
+      <td>6,15%</td>
+      <td>Vendedor 2</td>
+    </tr>
+    <tr>
+      <td>002100f778ceb8431b7a1020ff7ab48f</td>
+      <td>50</td>
+      <td>9</td>
+      <td>18,00%</td>
+      <td>Vendedor 3</td>
+    </tr>
+    <tr>
+      <td>003554e2dce176b5555353e4f3555ac8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 4</td>
+    </tr>
+    <tr>
+      <td>004c9cd9d87a3c30c522c48c4fc07416</td>
+      <td>156</td>
+      <td>10</td>
+      <td>6,41%</td>
+      <td>Vendedor 5</td>
+    </tr>
+    <tr>
+      <td>00720abe85ba0859807595bbf045a33b</td>
+      <td>13</td>
+      <td>2</td>
+      <td>15,38%</td>
+      <td>Vendedor 6</td>
+    </tr>
+    <tr>
+      <td>00ab3eff1b5192e5f1a63bcecfee11c8</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 7</td>
+    </tr>
+    <tr>
+      <td>00d8b143d12632bad99c0ad66ad52825</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 8</td>
+    </tr>
+    <tr>
+      <td>00ee68308b45bc5e2660cd833c3f81cc</td>
+      <td>135</td>
+      <td>10</td>
+      <td>7,41%</td>
+      <td>Vendedor 9</td>
+    </tr>
+    <tr>
+      <td>00fc707aaaad2d31347cf883cd2dfe10</td>
+      <td>103</td>
+      <td>4</td>
+      <td>3,88%</td>
+      <td>Vendedor 10</td>
+    </tr>
+    <tr>
+      <td>010543a62bd80aa422851e79a3bc7540</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 11</td>
+    </tr>
+    <tr>
+      <td>010da0602d7774602cd1b3f5fb7b709e</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 12</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Comparações por destino e mês: vendedor único e referência da mesma célula</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 45.887. <a href="tabelas/vendedores_celulas.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>ID do vendedor</th>
+      <th>UF de destino</th>
+      <th>Mês da compra</th>
+      <th>Pedidos avaliaveis</th>
+      <th>Atrasados</th>
+      <th>Taxa atraso</th>
+      <th>Rotulo</th>
+      <th>Pedidos referencia</th>
+      <th>Atrasados referencia</th>
+      <th>Taxa referencia</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0015a82c2db000af6aaaf3ae2ecb0532</td>
+      <td>Mg</td>
+      <td>2017-10</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 1</td>
+      <td>536</td>
+      <td>5</td>
+      <td>0,93%</td>
+    </tr>
+    <tr>
+      <td>0015a82c2db000af6aaaf3ae2ecb0532</td>
+      <td>Pr</td>
+      <td>2017-09</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 1</td>
+      <td>174</td>
+      <td>1</td>
+      <td>0,57%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ba</td>
+      <td>2017-06</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>103</td>
+      <td>8</td>
+      <td>7,77%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ba</td>
+      <td>2017-08</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>148</td>
+      <td>5</td>
+      <td>3,38%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ba</td>
+      <td>2017-09</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>165</td>
+      <td>28</td>
+      <td>16,97%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ba</td>
+      <td>2017-10</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>155</td>
+      <td>16</td>
+      <td>10,32%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ba</td>
+      <td>2017-11</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>242</td>
+      <td>36</td>
+      <td>14,88%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ba</td>
+      <td>2017-12</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>188</td>
+      <td>24</td>
+      <td>12,77%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ba</td>
+      <td>2018-01</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>226</td>
+      <td>15</td>
+      <td>6,64%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ba</td>
+      <td>2018-03</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>231</td>
+      <td>74</td>
+      <td>32,03%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ce</td>
+      <td>2017-05</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>61</td>
+      <td>1</td>
+      <td>1,64%</td>
+    </tr>
+    <tr>
+      <td>001cca7ae9ae17fb1caed9dfb1094831</td>
+      <td>Ce</td>
+      <td>2017-09</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0,00%</td>
+      <td>Vendedor 2</td>
+      <td>73</td>
+      <td>2</td>
+      <td>2,74%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Exemplos de taxas elevadas com bases pequenas: não são prioridade automática</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 10. <a href="tabelas/vendedores_bases_pequenas.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>ID do vendedor</th>
+      <th>Pedidos avaliados</th>
+      <th>Pedidos atrasados</th>
+      <th>Taxa atraso</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1352e06ae67b410cdae0b2a22361167b</td>
+      <td>2</td>
+      <td>2</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>685b870da5b52a710782c9c0fefbeb5b</td>
+      <td>2</td>
+      <td>2</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>Be1e9e378700cecaa4ebf71433d7915c</td>
+      <td>2</td>
+      <td>2</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>D8dd176509baa37f359644d082bf7f7b</td>
+      <td>2</td>
+      <td>2</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>E5bd51692380fd8cabb19b756b95e714</td>
+      <td>2</td>
+      <td>2</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>13d95f0f6f73943d4ceffad0fc2cd32c</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>154bdf805377afea75a3bd158e9eab10</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>19484c79cef6c062cb177aa4ef2fcc3c</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>1b4b28463457a256e9a784ebe2a8f630</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100,00%</td>
+    </tr>
+    <tr>
+      <td>1f2eebc0e970fd3c463e4f5d9652687a</td>
+      <td>1</td>
+      <td>1</td>
+      <td>100,00%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p><strong>Próximo passo:</strong> comparar os vendedores de maior volume dentro do mesmo destino/mês e verificar se os padrões persistem. A entrega final de um pedido multivendedor não revela quem causou seu atraso.</p></section><section id="experiencia"><p class="sobretitulo">04 / Experiência registrada</p><h2>Avaliações durante a espera e após o recebimento têm significados diferentes</h2><p class="descoberta">Entre pedidos finalmente atrasados: nota 1,63 durante a espera após o prazo (4.431 pedidos), contra 3,72 na entrega ou depois (1.908 pedidos).</p><p>Grupos diferentes, com pedidos presentes em mais de um recorte. A classificação usa datas registradas; não é comparação antes/depois do mesmo cliente.</p><h3>Notas de pedidos atrasados: dois momentos de resposta</h3><div class="tabela" tabindex="0" role="region" aria-label="Notas de pedidos atrasados: dois momentos de resposta"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Recorte resposta</th>
+      <th>Pedidos</th>
+      <th>Registros</th>
+      <th>Nota média</th>
+      <th>Cobertura situacao</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Antes da entrega, após o dia prometido</td>
+      <td>4.431</td>
+      <td>4.445</td>
+      <td>1,63</td>
+      <td>68%</td>
+    </tr>
+    <tr>
+      <td>Na entrega ou depois</td>
+      <td>1.908</td>
+      <td>1.910</td>
+      <td>3,72</td>
+      <td>29%</td>
+    </tr>
+  </tbody>
+</table></div><p><a href="tabelas/notas_principais.csv" download>Baixar a seleção (CSV)</a></p><p>O detalhamento de severidade mantém a base de cada grupo; poucas avaliações após atrasos acima de 30 dias não sustentam generalização.</p>
+<p>A comparação histórica é 4,29 no prazo versus 2,27 atrasados, com uma nota média por pedido. Entre registros associados a atrasados, 70,20% foram respondidos antes da entrega registrada. Esse percentual usa registros, não pedidos.</p>
+<figure><a href="imagens/grafico_satisfacao_fidelizacao.png"><img src="imagens/grafico_satisfacao_fidelizacao.png" alt="Notas por situação final da entrega e momento da resposta, com quantidade de pedidos por grupo. Associação observada, sem demonstração causal." loading="lazy"></a><figcaption>Notas por situação final da entrega e momento da resposta, com quantidade de pedidos por grupo. Associação observada, sem demonstração causal.</figcaption></figure>
+<details><summary>Comparação histórica: cobertura e média por pedido</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 2. <a href="tabelas/satisfacao_historica.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Atrasados</th>
+      <th>Total pedidos</th>
+      <th>Pedidos com nota</th>
+      <th>Nota média</th>
+      <th>Nota mediana</th>
+      <th>Cobertura avaliacoes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>89.936</td>
+      <td>89.443</td>
+      <td>4,29</td>
+      <td>5,00</td>
+      <td>99%</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>6.534</td>
+      <td>6.381</td>
+      <td>2,27</td>
+      <td>1,00</td>
+      <td>98%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Momentos da resposta: registros, pedidos e médias</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 5. <a href="tabelas/momento_avaliacoes.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Atrasados</th>
+      <th>Recorte resposta</th>
+      <th>Pedidos</th>
+      <th>Registros</th>
+      <th>Nota média</th>
+      <th>Cobertura situacao</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>Antes da entrega, até o dia prometido</td>
+      <td>292</td>
+      <td>295</td>
+      <td>4,03</td>
+      <td>0%</td>
+    </tr>
+    <tr>
+      <td>0</td>
+      <td>Na entrega ou depois</td>
+      <td>89.263</td>
+      <td>89.649</td>
+      <td>4,29</td>
+      <td>99%</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Antes da entrega, após o dia prometido</td>
+      <td>4.431</td>
+      <td>4.445</td>
+      <td>1,63</td>
+      <td>68%</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Antes da entrega, até o dia prometido</td>
+      <td>53</td>
+      <td>54</td>
+      <td>3,47</td>
+      <td>1%</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>Na entrega ou depois</td>
+      <td>1.908</td>
+      <td>1.910</td>
+      <td>3,72</td>
+      <td>29%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Qualidade das datas de avaliação na base completa</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 3. <a href="tabelas/qualidade_avaliacoes.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Index</th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Criacao ausente</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Resposta ausente</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <td>Resposta antes criacao</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p>Na base completa, 547 pedidos têm várias avaliações; no recorte de prazo, 123 aparecem em mais de um recorte temporal. A nota é consolidada por pedido dentro de cada recorte. A soma dos pedidos dos grupos pode exceder o total distinto. Registros não classificáveis são preservados.</p>
+<p><strong>Próximo passo:</strong> examinar avaliações de atrasos severos, distinguindo resposta durante a espera de resposta posterior. A situação final não comprova que o cliente já conhecia o desfecho quando respondeu.</p></section><section id="recompra"><p class="sobretitulo">05 / Comportamento de compra</p><h2>Múltiplos pedidos e recompra observável são indicadores diferentes</h2><p class="descoberta">978 de 75.387 clientes elegíveis retornaram em outro dia dentro de 90 dias: 1,30%.</p><p>Elegíveis têm 90 dias observáveis após a primeira compra entregue observada. Sem referência comparável, a taxa não é classificada como alta ou baixa.</p>
+<p>2.801 clientes fizeram múltiplos pedidos entregues; 2.015 compraram em dias diferentes. Entre os primeiros, 786 concentraram todas as compras no mesmo dia.</p>
+<figure><a href="imagens/grafico_recompra.png"><img src="imagens/grafico_recompra.png" alt="Compras em dias diferentes são separadas de múltiplos pedidos. A taxa de 90 dias usa apenas clientes com janela completa; não mede lealdade." loading="lazy"></a><figcaption>Compras em dias diferentes são separadas de múltiplos pedidos. A taxa de 90 dias usa apenas clientes com janela completa; não mede lealdade.</figcaption></figure>
+<p>Até o corte observado em 29/08/2018, 75.387 clientes tinham 90 dias de observação desde a primeira compra entregue observada. 978 voltaram em outro dia dentro de 1–90 dias: <strong>1,30%</strong>. Não se exige que a primeira entrega tenha ocorrido antes da segunda compra.</p>
+<details><summary>Populações da recompra observada</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 6. <a href="tabelas/recompra.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Index</th>
+      <th>0</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Clientes</td>
+      <td>93.358</td>
+    </tr>
+    <tr>
+      <td>Multiplos pedidos</td>
+      <td>2.801</td>
+    </tr>
+    <tr>
+      <td>Outro dia</td>
+      <td>2.015</td>
+    </tr>
+    <tr>
+      <td>Elegiveis 90d</td>
+      <td>75.387</td>
+    </tr>
+    <tr>
+      <td>Recompraram 90d</td>
+      <td>978</td>
+    </tr>
+    <tr>
+      <td>Taxa 90d</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Referência histórica de múltiplos pedidos: clientes, pedidos e valores</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 2. <a href="tabelas/multiplos_pedidos.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Recorrente</th>
+      <th>Clientes distintos</th>
+      <th>Pedidos distintos</th>
+      <th>Produtos (R$)</th>
+      <th>Participacao clientes</th>
+      <th>Participacao valor</th>
+      <th>Ticket (R$)</th>
+      <th>Valor por cliente</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>90.557</td>
+      <td>90.557</td>
+      <td>12.493.089,36</td>
+      <td>97,00%</td>
+      <td>94,49%</td>
+      <td>137,96</td>
+      <td>137,96</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>2.801</td>
+      <td>5.921</td>
+      <td>728.408,75</td>
+      <td>3,00%</td>
+      <td>5,51%</td>
+      <td>123,02</td>
+      <td>260,05</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p><strong>Limite e próximo passo:</strong> o status final delivered e a cobertura desigual podem afetar a leitura; a última data não comprova extração completa. Investigar coortes com acompanhamento completo antes de definir ações de retenção. Nenhuma relação entre atraso e recompra foi estimada.</p></section><section id="pagamentos"><p class="sobretitulo">06 / Pagamentos</p><h2>Parcelamento: quantidade e mediana dão contexto às médias</h2><p class="descoberta">Relógios e presentes, 8 parcelas: 687 pedidos, 16,01% dos pedidos e 29,04% do valor pago da categoria no complemento.</p><h3>Maior grupo por valor pago entre oito/dez parcelas, categoria única</h3><div class="tabela" tabindex="0" role="region" aria-label="Maior grupo por valor pago entre oito/dez parcelas, categoria única"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Categoria</th>
+      <th>Parcelas</th>
+      <th>Pedidos</th>
+      <th>Valor pago</th>
+      <th>Media</th>
+      <th>Mediana</th>
+      <th>Participacao pedidos categoria</th>
+      <th>Participacao valor categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Relógios e presentes</td>
+      <td>8</td>
+      <td>687</td>
+      <td>298.535,90</td>
+      <td>434,55</td>
+      <td>273,47</td>
+      <td>16,01%</td>
+      <td>29,04%</td>
+    </tr>
+  </tbody>
+</table></div><p><a href="tabelas/parcelamento_principal.csv" download>Baixar a seleção (CSV)</a></p><p>O valor pago pode incluir frete; a participação usa somente o complemento de cartão único e categoria única. Investigar quais produtos compõem essa concentração antes de propor intervenções.</p>
+<p>O recorte inclui 71.841 pedidos com pagamento único no cartão, parcelas ≥ 1 e valor positivo. Acima de dez parcelas: 317 pedidos (0,44%).</p>
+<figure><a href="imagens/grafico_pagamentos.png"><img src="imagens/grafico_pagamentos.png" alt="Média e mediana em pontos, com volume alinhado entre uma e dez parcelas. Grupos acima de dez estão disponíveis na tabela, sem destaque desproporcional." loading="lazy"></a><figcaption>Média e mediana em pontos, com volume alinhado entre uma e dez parcelas. Grupos acima de dez estão disponíveis na tabela, sem destaque desproporcional.</figcaption></figure>
+<details><summary>Formas de pagamento: registros, pedidos e participação no valor</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 4. <a href="tabelas/formas_pagamento.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Payment type</th>
+      <th>Registros pagamento</th>
+      <th>Pedidos distintos</th>
+      <th>Valor pago</th>
+      <th>Participacao valor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Credit card</td>
+      <td>74.586</td>
+      <td>74.304</td>
+      <td>12.101.094,88</td>
+      <td>78,46%</td>
+    </tr>
+    <tr>
+      <td>Boleto</td>
+      <td>19.191</td>
+      <td>19.191</td>
+      <td>2.769.932,58</td>
+      <td>17,96%</td>
+    </tr>
+    <tr>
+      <td>Voucher</td>
+      <td>5.493</td>
+      <td>3.679</td>
+      <td>343.013,19</td>
+      <td>2,22%</td>
+    </tr>
+    <tr>
+      <td>Debit card</td>
+      <td>1.486</td>
+      <td>1.485</td>
+      <td>208.421,12</td>
+      <td>1,35%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Todas as quantidades de parcelas, incluindo grupos raros</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 23. <a href="tabelas/parcelamento.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Parcelas</th>
+      <th>Quantidade pedidos</th>
+      <th>Valor medio compra</th>
+      <th>Valor mediano compra</th>
+      <th>Participacao pedidos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>23.113</td>
+      <td>100,37</td>
+      <td>71,19</td>
+      <td>32,17%</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>11.769</td>
+      <td>127,81</td>
+      <td>111,32</td>
+      <td>16,38%</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>9.950</td>
+      <td>142,81</td>
+      <td>111,83</td>
+      <td>13,85%</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>6.752</td>
+      <td>164,33</td>
+      <td>117,46</td>
+      <td>9,40%</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>4.991</td>
+      <td>182,37</td>
+      <td>126,23</td>
+      <td>6,95%</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td>3.722</td>
+      <td>209,24</td>
+      <td>138,76</td>
+      <td>5,18%</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>1.534</td>
+      <td>186,32</td>
+      <td>139,95</td>
+      <td>2,14%</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td>4.061</td>
+      <td>306,10</td>
+      <td>211,89</td>
+      <td>5,65%</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td>608</td>
+      <td>199,11</td>
+      <td>102,56</td>
+      <td>0,85%</td>
+    </tr>
+    <tr>
+      <td>10</td>
+      <td>5.024</td>
+      <td>409,53</td>
+      <td>238,05</td>
+      <td>6,99%</td>
+    </tr>
+    <tr>
+      <td>11</td>
+      <td>22</td>
+      <td>125,60</td>
+      <td>116,59</td>
+      <td>0,03%</td>
+    </tr>
+    <tr>
+      <td>12</td>
+      <td>124</td>
+      <td>327,27</td>
+      <td>199,08</td>
+      <td>0,17%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p>A comparação por categoria cobre 71.253 pedidos (99,18% do recorte); exclui 588 multicategoria. Cada pedido contribui uma vez com seu pagamento integral. Não há rateio arbitrário.</p>
+<details><summary>Oito e dez parcelas: maiores volumes de valor pago por categoria, com quantidade e participação</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 12. <a href="tabelas/destaques_oito_dez.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Categoria</th>
+      <th>Parcelas</th>
+      <th>Pedidos</th>
+      <th>Valor pago</th>
+      <th>Media</th>
+      <th>Mediana</th>
+      <th>Participacao pedidos categoria</th>
+      <th>Participacao valor categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Relógios e presentes</td>
+      <td>8</td>
+      <td>687</td>
+      <td>298.535,90</td>
+      <td>434,55</td>
+      <td>273,47</td>
+      <td>16,01%</td>
+      <td>29,04%</td>
+    </tr>
+    <tr>
+      <td>Beleza saude</td>
+      <td>8</td>
+      <td>551</td>
+      <td>198.053,87</td>
+      <td>359,44</td>
+      <td>322,89</td>
+      <td>8,44%</td>
+      <td>17,89%</td>
+    </tr>
+    <tr>
+      <td>Automotivo</td>
+      <td>10</td>
+      <td>259</td>
+      <td>138.587,45</td>
+      <td>535,09</td>
+      <td>374,93</td>
+      <td>9,26%</td>
+      <td>26,78%</td>
+    </tr>
+    <tr>
+      <td>Cama, mesa e banho</td>
+      <td>8</td>
+      <td>682</td>
+      <td>137.259,14</td>
+      <td>201,26</td>
+      <td>164,68</td>
+      <td>9,76%</td>
+      <td>14,44%</td>
+    </tr>
+    <tr>
+      <td>Esporte lazer</td>
+      <td>10</td>
+      <td>305</td>
+      <td>134.833,99</td>
+      <td>442,08</td>
+      <td>249,04</td>
+      <td>5,53%</td>
+      <td>15,79%</td>
+    </tr>
+    <tr>
+      <td>Beleza saude</td>
+      <td>10</td>
+      <td>338</td>
+      <td>133.519,95</td>
+      <td>395,03</td>
+      <td>309,81</td>
+      <td>5,18%</td>
+      <td>12,06%</td>
+    </tr>
+    <tr>
+      <td>Cama, mesa e banho</td>
+      <td>10</td>
+      <td>588</td>
+      <td>127.376,95</td>
+      <td>216,63</td>
+      <td>175,44</td>
+      <td>8,42%</td>
+      <td>13,40%</td>
+    </tr>
+    <tr>
+      <td>Relógios e presentes</td>
+      <td>10</td>
+      <td>256</td>
+      <td>116.872,63</td>
+      <td>456,53</td>
+      <td>280,06</td>
+      <td>5,97%</td>
+      <td>11,37%</td>
+    </tr>
+    <tr>
+      <td>Cool stuff</td>
+      <td>10</td>
+      <td>280</td>
+      <td>113.753,71</td>
+      <td>406,26</td>
+      <td>250,78</td>
+      <td>10,55%</td>
+      <td>21,34%</td>
+    </tr>
+    <tr>
+      <td>Informática e acessórios</td>
+      <td>10</td>
+      <td>234</td>
+      <td>107.566,44</td>
+      <td>459,69</td>
+      <td>212,82</td>
+      <td>5,26%</td>
+      <td>15,61%</td>
+    </tr>
+    <tr>
+      <td>Ferramentas jardim</td>
+      <td>10</td>
+      <td>215</td>
+      <td>107.005,72</td>
+      <td>497,70</td>
+      <td>247,32</td>
+      <td>8,94%</td>
+      <td>25,47%</td>
+    </tr>
+    <tr>
+      <td>Móveis e decoração</td>
+      <td>10</td>
+      <td>358</td>
+      <td>101.166,63</td>
+      <td>282,59</td>
+      <td>196,96</td>
+      <td>7,99%</td>
+      <td>15,77%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<details><summary>Todas as categorias e parcelas; quantidade, média, mediana e participação</summary><p>Apoio técnico: primeiras 12 linhas da ordenação original; total 777. <a href="tabelas/categoria_parcelas.csv" download>Baixar todos os valores calculados (CSV)</a></p><div class="tabela" tabindex="0"><table class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>Categoria</th>
+      <th>Parcelas</th>
+      <th>Pedidos</th>
+      <th>Valor pago</th>
+      <th>Media</th>
+      <th>Mediana</th>
+      <th>Participacao pedidos categoria</th>
+      <th>Participacao valor categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Sem categoria</td>
+      <td>1</td>
+      <td>343</td>
+      <td>31.968,59</td>
+      <td>93,20</td>
+      <td>76,08</td>
+      <td>34,37%</td>
+      <td>22,18%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>2</td>
+      <td>206</td>
+      <td>27.696,21</td>
+      <td>134,45</td>
+      <td>138,60</td>
+      <td>20,64%</td>
+      <td>19,21%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>3</td>
+      <td>133</td>
+      <td>17.452,41</td>
+      <td>131,22</td>
+      <td>122,88</td>
+      <td>13,33%</td>
+      <td>12,11%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>4</td>
+      <td>84</td>
+      <td>11.198,71</td>
+      <td>133,32</td>
+      <td>117,31</td>
+      <td>8,42%</td>
+      <td>7,77%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>5</td>
+      <td>64</td>
+      <td>12.070,41</td>
+      <td>188,60</td>
+      <td>121,98</td>
+      <td>6,41%</td>
+      <td>8,37%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>6</td>
+      <td>54</td>
+      <td>8.930,71</td>
+      <td>165,38</td>
+      <td>118,68</td>
+      <td>5,41%</td>
+      <td>6,19%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>7</td>
+      <td>24</td>
+      <td>3.694,63</td>
+      <td>153,94</td>
+      <td>141,60</td>
+      <td>2,40%</td>
+      <td>2,56%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>8</td>
+      <td>43</td>
+      <td>10.786,71</td>
+      <td>250,85</td>
+      <td>188,52</td>
+      <td>4,31%</td>
+      <td>7,48%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>9</td>
+      <td>5</td>
+      <td>1.646,21</td>
+      <td>329,24</td>
+      <td>138,17</td>
+      <td>0,50%</td>
+      <td>1,14%</td>
+    </tr>
+    <tr>
+      <td>Sem categoria</td>
+      <td>10</td>
+      <td>42</td>
+      <td>18.717,20</td>
+      <td>445,65</td>
+      <td>229,26</td>
+      <td>4,21%</td>
+      <td>12,98%</td>
+    </tr>
+    <tr>
+      <td>Agro industria e comercio</td>
+      <td>1</td>
+      <td>40</td>
+      <td>5.305,53</td>
+      <td>132,64</td>
+      <td>84,69</td>
+      <td>33,90%</td>
+      <td>10,50%</td>
+    </tr>
+    <tr>
+      <td>Agro industria e comercio</td>
+      <td>2</td>
+      <td>9</td>
+      <td>4.272,86</td>
+      <td>474,76</td>
+      <td>244,48</td>
+      <td>7,63%</td>
+      <td>8,46%</td>
+    </tr>
+  </tbody>
+</table></div></details>
+<p><strong>Próximo passo:</strong> investigar os produtos que compõem a concentração de oito e dez parcelas já identificada. Maior valor médio é associação observada; não comprova que oferecer mais parcelas aumentará vendas, margem ou conversão.</p></section><section id="prioridades"><h2>Três investigações antes de uma decisão operacional</h2><ol>
+<li><strong>Logística:</strong> começar pelo RJ em fevereiro/março de 2018; obter registros de transporte e ocorrências para explicar diferenças de espera e apoiar a revisão do processo; confrontar volume, taxa e intervalos dos atrasos severos para localizar onde a espera se acumula.</li>
+<li><strong>Comercial:</strong> investigar produtos e disponibilidade em Cama, mesa e banho, Informática e acessórios, Móveis e decoração na mudança novembro/dezembro de 2017, preservando categorias que cresceram.</li>
+<li><strong>Experiência:</strong> examinar notas durante a espera e após a entrega nos atrasos acima de 30 dias; buscar evidência sobre a jornada antes de formular intervenções.</li></ol>
+<p>São prioridades de investigação histórica. Responsabilidade, viabilidade e custo ainda precisam ser apurados. Não há previsão, cenário simulado ou evidência de efeito causal.</p></section></main><footer><p>Os critérios variam por tema: prazo exige datas válidas; vendas incluem todos os entregues; cartão e recompra têm recortes próprios. Valores exportados preservam a precisão calculada; a exibição usa formato brasileiro.</p><p><a href="../Estrutura_de_pensamento/Critérios dos indicadores.md">Critérios e rastreabilidade</a> · <a href="../Estrutura_de_pensamento/Entrega da evolução.md">Registro da entrega</a></p></footer></body></html>

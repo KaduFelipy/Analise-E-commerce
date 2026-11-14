@@ -54,6 +54,13 @@ resumo_estados['frete_percentual'] = (
 )
 maiores_proporcoes = resumo_estados.nlargest(5,'frete_percentual')[['pedidos_distintos', 'valor_produtos','valor_frete','frete_percentual']]
 
+from analises.entregas import resumo_estados as entregas_estados
+
+resumo_integrado = resumo_estados.join(entregas_estados.rename(columns={'pedidos_entregues': 'pedidos_avaliaveis'}), validate='one_to_one')
+resumo_integrado['participacao_vendas'] = resumo_integrado['valor_produtos'] / resumo_integrado['valor_produtos'].sum() * 100
+resumo_integrado['ticket_medio'] = resumo_integrado['valor_produtos'] / resumo_integrado['pedidos_distintos']
+resumo_integrado['frete_medio_pedido'] = resumo_integrado['valor_frete'] / resumo_integrado['pedidos_distintos']
+
 # print(f'\nCinco estados com maior proporção de frete \n{maiores_proporcoes.round(2).to_string()}')
 
 

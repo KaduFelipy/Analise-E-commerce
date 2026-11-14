@@ -1,0 +1,4 @@
+﻿,validos,ausentes,negativos,mediana_dias,percentil_90_dias
+Compra → aprovação,96456,14,0,0.014305555555555556,1.4414467592592592
+Aprovação → transportador,95105,15,1350,1.849050925925926,6.023055555555556
+Transportador → cliente,96446,1,23,7.100312499999999,18.901423611111113

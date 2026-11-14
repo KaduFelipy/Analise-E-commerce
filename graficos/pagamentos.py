@@ -1,11 +1,12 @@
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+from graficos.formatacao import brasileiro, contextualizar
 
 
 def criar_grafico_pagamentos(resumo_formas, resumo_parcelamento):
     formas = resumo_formas.sort_values("participacao_valor")
-    parcelas = resumo_parcelamento.sort_index()
+    parcelas = resumo_parcelamento.loc[resumo_parcelamento.index <= 10].sort_index()
 
     assert not formas.empty
     assert not parcelas.empty
@@ -55,7 +56,7 @@ def criar_grafico_pagamentos(resumo_formas, resumo_parcelamento):
         parcelas["valor_medio_compra"],
         marker="o",
         color="#287D8E",
-        label="Média",
+        label="Média", linestyle='None',
     )
 
     ax.plot(
@@ -63,7 +64,7 @@ def criar_grafico_pagamentos(resumo_formas, resumo_parcelamento):
         parcelas["valor_mediano_compra"],
         marker="o",
         color="#C45136",
-        label="Mediana",
+        label="Mediana", linestyle='None', markerfacecolor='none',
     )
 
     destaques = parcelas.loc[[8, 10]]
@@ -126,6 +127,9 @@ def criar_grafico_pagamentos(resumo_formas, resumo_parcelamento):
 
     caminho_imagem = pasta_imagens / "grafico_pagamentos.png"
 
+    raros = resumo_parcelamento.loc[resumo_parcelamento.index > 10, 'quantidade_pedidos'].sum()
+    fig.suptitle(f'Oito e dez parcelas combinam valor e volume no cartão único\nAcima de dez: {brasileiro(raros, 0)} pedidos ({brasileiro(raros / resumo_parcelamento["quantidade_pedidos"].sum() * 100)}%); detalhes na tabela', fontsize=15)
+    contextualizar(fig, '09/2016–08/2018; cartão único, parcelas ≥ 1 e valor positivo')
     fig.savefig(caminho_imagem, dpi=150, bbox_inches="tight")
     plt.close(fig)
 

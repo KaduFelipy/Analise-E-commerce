@@ -1,3 +1,5 @@
+> Documento revisado em 14/11/2026. Preserva a lógica da análise inicial e incorpora os recortes implementados na versão final. Definições comuns em [Critérios dos indicadores](Crit%C3%A9rios%20dos%20indicadores.md); histórico de implementação em [Entrega da evolução](Entrega%20da%20evolu%C3%A7%C3%A3o.md).
+
 # Análise de desempenho de vendas — Olist
 
 ## 1. Objetivo
@@ -296,7 +298,35 @@ Essas leituras orientam a investigação, sem atribuir causas ainda não demonst
 - A presença de compras no primeiro e no último dia do mês não comprova a completude dos registros.
 - Não foram comparados anos completos, pois 2018 não possui todos os meses disponíveis.
 - As causas das oscilações mensais não foram investigadas.
-- Não foi medida a contribuição de cada categoria para as variações mensais.
+- A contribuição das categorias foi medida especificamente na comparação novembro/dezembro de 2017; a decomposição não foi generalizada a todas as variações mensais.
 - As diferenças de ticket podem estar relacionadas a preços, quantidade de itens por pedido ou composição dos produtos, mas essas hipóteses não foram testadas.
 - Os itens sem categoria foram preservados, mas sua classificação original permanece desconhecida.
 - Os valores foram processados como `float64`; a reconciliação tolera pequenas diferenças de representação numérica, sem constituir auditoria contábil.
+
+## 10. Aprofundamento: o que compõe a queda de novembro/dezembro?
+
+### Contexto e lógica
+
+O resultado mensal mostrou a queda, mas ainda era necessário localizar sua composição. A análise passou de “quanto variou?” para “quais categorias participaram dessa diferença?”. A função `calcular_contribuicoes(dados)`, em `analises/vendas.py`, agrupa o valor por categoria/mês e calcula dezembro menos novembro. Categorias sem venda em um dos dois meses recebem zero naquele mês; “Sem categoria” permanece incluída.
+
+| Indicador | Novembro/2017 | Dezembro/2017 | Variação |
+|---|---:|---:|---:|
+| Valor dos produtos | R$ 987.765,37 | R$ 726.033,19 | −26,50% |
+| Pedidos | 7.289 | 5.513 | −24,37% |
+| Ticket médio | R$ 135,51 | R$ 131,69 | −2,82% |
+
+A queda líquida foi de **R$ 261.732,18**. Cama, mesa e banho; informática e acessórios; e móveis e decoração somaram **R$ 101.142,30 em reduções**, equivalentes a **38,64% da queda líquida**. A proporção usa a queda após as compensações das categorias que cresceram, e não a soma apenas das reduções. Não se somam as variações percentuais de pedidos e ticket como contribuições aditivas.
+
+O ticket também foi decomposto pela identidade `ticket = itens por pedido × preço médio por item`. Entre novembro e dezembro, os itens por pedido passaram de aproximadamente 1,16 para 1,12, enquanto o preço médio por item passou de R$ 116,55 para R$ 117,35. Isso descreve a composição observada; não demonstra reajuste de preço do mesmo produto.
+
+### Contribuição gerencial e apresentação
+
+A gestão comercial pode começar a investigação pelas três categorias, examinando os produtos que compõem a diferença. Estoque, disponibilidade e campanhas são hipóteses a verificar com informações adicionais, não causas demonstradas nesta base.
+
+O gráfico de contribuições preserva reduções, aumentos e saldo das demais categorias. As tabelas de apoio permitem reconciliar a soma das diferenças com a queda nacional. Pedidos com itens de categorias diferentes podem aparecer em várias categorias; suas contagens não são aditivas entre categorias.
+
+### Rastreabilidade
+
+- Código: [análise de vendas](../analises/vendas.py) e [gráficos de vendas](../graficos/vendas.py).
+- Evidências: [comparação novembro/dezembro](../web/tabelas/comparacao_nov_dez.csv), [contribuições completas](../web/tabelas/contribuicoes_categorias.csv) e [categorias por mês](../web/tabelas/categorias_mensais.csv).
+- Contexto adicional: [fevereiro–julho entre anos](../web/tabelas/contexto_anos.csv), sem comparação de anos completos ou comprovação de sazonalidade.
