@@ -16,6 +16,8 @@ from graficos.vendedores import criar_grafico_vendedores
 from analises.satisfacao_fidelizacao import resumo_satisfacao, resumo_recorrencia
 from graficos.satisfacao_fidelizacao import criar_grafico_satisfacao_fidelizacao
 
+from analises.pagamentos import resumo_formas, resumo_parcelamento
+from graficos.pagamentos import criar_grafico_pagamentos
 
 
 
@@ -38,6 +40,11 @@ caminho_grafico_satisfacao = criar_grafico_satisfacao_fidelizacao(
     resumo_recorrencia
 )
 
+caminho_grafico_pagamentos = criar_grafico_pagamentos(
+    resumo_formas,
+    resumo_parcelamento
+)
+
 
 caminho_html = (
     Path(__file__).resolve().parent
@@ -58,6 +65,9 @@ if not caminho_grafico_vendedores.is_file():
     raise FileNotFoundError(f'Página não encontrada!')
 
 if not caminho_grafico_satisfacao.is_file():
+    raise FileNotFoundError(f'Página não encontrada!')
+
+if not caminho_grafico_pagamentos.is_file():
     raise FileNotFoundError(f'Página não encontrada!')
 
 webbrowser.open(caminho_html.as_uri())

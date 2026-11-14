@@ -779,6 +779,194 @@
             </p>
         </section>
 
+        <section id="pagamentos">
+            <h2>Comportamento de pagamento e parcelamento</h2>
+
+            <p>
+                <strong>O cartão de crédito concentrou 78,46% do valor pago.</strong>
+                No recorte de compras com pagamento único no cartão,
+                oito e dez parcelas se destacaram por combinar valores
+                elevados com milhares de pedidos.
+            </p>
+
+            <h3>Como os clientes pagam?</h3>
+
+            <div class="tabela">
+                <table>
+                    <caption>
+                        Formas de pagamento utilizadas nos pedidos entregues
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Forma de pagamento</th>
+                            <th scope="col">Pedidos que utilizaram a forma</th>
+                            <th scope="col">Valor pago registrado</th>
+                            <th scope="col">Participação no valor pago</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">Cartão de crédito</th>
+                            <td>74.304</td>
+                            <td>R$ 12.101.094,88</td>
+                            <td>78,46%</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Boleto</th>
+                            <td>19.191</td>
+                            <td>R$ 2.769.932,58</td>
+                            <td>17,96%</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Voucher</th>
+                            <td>3.679</td>
+                            <td>R$ 343.013,19</td>
+                            <td>2,22%</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">Cartão de débito</th>
+                            <td>1.485</td>
+                            <td>R$ 208.421,12</td>
+                            <td>1,35%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                Foram encontrados 100.756 registros de pagamento associados
+                a 96.477 pedidos entregues. Um mesmo pedido pode utilizar
+                várias formas de pagamento e aparecer em mais de uma linha
+                da tabela acima.
+            </p>
+
+            <h3>Como o parcelamento se relaciona com o valor da compra?</h3>
+
+            <p>
+                A comparação considerou <strong>71.841 pedidos</strong>
+                com um único registro de pagamento no cartão de crédito,
+                quantidade de parcelas válida e valor positivo.
+                Nesse recorte, o registro representa o valor total pago
+                pelo pedido.
+            </p>
+
+            <figure>
+                <a href="imagens/grafico_pagamentos.png" target="_blank" rel="noopener">
+                    <img src="imagens/grafico_pagamentos.png" alt="Gráficos mostram a participação das formas de pagamento,
+                a média e a mediana do valor das compras por quantidade
+                de parcelas e o número de pedidos em cada grupo.">
+                </a>
+
+                <figcaption>
+                    Clique para ampliar. O painel de quantidade de pedidos
+                    permite avaliar o volume que sustenta as médias
+                    e medianas de cada grupo de parcelamento.
+                </figcaption>
+            </figure>
+
+            <h3>Oito e dez parcelas se destacam na comparação</h3>
+
+            <div class="tabela">
+                <table>
+                    <caption>
+                        Grupos selecionados para interpretar o parcelamento
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Parcelas</th>
+                            <th scope="col">Pedidos</th>
+                            <th scope="col">Valor médio da compra</th>
+                            <th scope="col">Valor mediano da compra</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>23.113</td>
+                            <td>R$ 100,37</td>
+                            <td>R$ 71,19</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">8</th>
+                            <td>4.061</td>
+                            <td>R$ 306,10</td>
+                            <td>R$ 211,89</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">10</th>
+                            <td>5.024</td>
+                            <td>R$ 409,53</td>
+                            <td>R$ 238,05</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p>
+                Os grupos de oito e dez parcelas apresentaram valores
+                médios e medianos elevados, sustentados por
+                <strong>4.061 e 5.024 pedidos</strong>, respectivamente.
+                A relação apresenta oscilações entre os grupos,
+                que permanecem visíveis no gráfico.
+            </p>
+        </section>
+
+        <section class="conclusao">
+            <h2>Conclusão da análise de pagamentos</h2>
+
+            <p>
+                O cartão de crédito foi a forma com maior participação
+                no valor pago registrado. No recorte de pedidos com
+                pagamento único no cartão, os resultados reforçam
+                a associação entre maior parcelamento e compras
+                de maior valor, com destaque para oito e dez parcelas.
+            </p>
+
+            <h3>Critérios e limites</h3>
+
+            <ul>
+                <li>
+                    A distribuição das formas de pagamento considera
+                    os registros associados a pedidos entregues.
+                </li>
+
+                <li>
+                    Um dos 96.478 pedidos entregues ficou sem registro
+                    correspondente na tabela de pagamentos.
+                </li>
+
+                <li>
+                    A comparação do parcelamento considera somente pedidos
+                    com um único registro de pagamento no cartão,
+                    parcelas iguais ou superiores a uma e valor positivo.
+                </li>
+
+                <li>
+                    O valor pago pode incluir frete. Os valores apresentados
+                    por quantidade de parcelas representam o total da compra.
+                </li>
+
+                <li>
+                    Os grupos possuem quantidades diferentes de pedidos.
+                    Alguns parcelamentos menos frequentes têm poucos registros.
+                </li>
+
+                <li>
+                    O efeito de oferecer mais parcelas sobre o valor comprado
+                    permanece sem avaliação.
+                </li>
+            </ul>
+        </section>
+
         <footer>
             <h2>Critérios e limites</h2>
             <p>
