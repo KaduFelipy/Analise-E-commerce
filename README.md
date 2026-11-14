@@ -227,33 +227,117 @@ Projeto E-commerce/
 └── LICENSE
 ```
 
-## Como consultar e executar
+## Como executar o projeto localmente
 
-Para consultar a entrega existente, abra [`web/index.html`](web/index.html) em um navegador local. O repositório contém a página estática; não é necessário iniciar um servidor para essa consulta.
+### Pré-requisitos
 
-Para regenerar os resultados:
+- Python 3.14 instalado e disponível no terminal.
+- Git, caso utilize a opção de clonagem.
+- Navegador para visualizar o relatório.
 
-1. Disponibilize os CSVs da base Olist em `dados/olist/`, preservando os nomes originais. Os módulos usam arquivos como `olist_orders_dataset.csv`, `olist_order_items_dataset.csv`, `olist_customers_dataset.csv` e as demais tabelas da extração.
-2. Na raiz do projeto, crie um ambiente virtual e instale as dependências. O arquivo existente se chama **`requirement.txt`**, no singular.
-3. Execute `main.py` para gerar figuras, tabelas e relatório.
+O ambiente local conferido utiliza Python 3.14.10, pandas 3.1.0 e Matplotlib 3.11.2.
 
-Exemplo no PowerShell:
+Os comandos abaixo são para Windows com PowerShell.
+
+### 1. Baixar o projeto
+
+Clone o repositório e entre na pasta:
+
+```powershell
+git clone https://github.com/KaduFelipy/Analise-E-commerce.git
+cd Analise-E-commerce
+```
+
+Também é possível baixar o ZIP pelo GitHub, extraí-lo e abrir a pasta no VS Code.
+
+Execute os próximos comandos na raiz do projeto, onde estão `main.py` e `requirement.txt`.
+
+### 2. Conferir o Python
+
+```powershell
+python --version
+```
+
+Confira se o comando utiliza a versão do Python desejada antes de criar o ambiente virtual.
+
+### 3. Criar o ambiente virtual
 
 ```powershell
 python -m venv .venv
+```
+
+O ambiente virtual mantém as dependências do projeto em uma pasta própria.
+
+Os próximos comandos utilizam diretamente o Python desse ambiente, dispensando sua ativação no PowerShell.
+
+### 4. Instalar as dependências
+
+```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirement.txt
+```
+
+O arquivo `requirement.txt` contém as versões das bibliotecas utilizadas pelo projeto.
+
+### 5. Conferir os dados
+
+Os CSVs de origem estão incluídos no repositório e devem permanecer nesta estrutura:
+
+```text
+dados/
+└── olist/
+    ├── olist_customers_dataset.csv
+    ├── olist_geolocation_dataset.csv
+    ├── olist_order_items_dataset.csv
+    ├── olist_order_payments_dataset.csv
+    ├── olist_order_reviews_dataset.csv
+    ├── olist_orders_dataset.csv
+    ├── olist_products_dataset.csv
+    ├── olist_sellers_dataset.csv
+    └── product_category_name_translation.csv
+```
+
+Caso os arquivos estejam ausentes, obtenha a base no [Kaggle](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) e extraia os CSVs em `dados/olist/`, preservando seus nomes.
+
+### 6. Executar a análise e abrir o relatório
+
+```powershell
 .\.venv\Scripts\python.exe main.py
 ```
 
-Para gerar sem abrir o navegador:
+A execução realiza os cálculos e as validações, gera oito figuras, exporta as tabelas e atualiza o relatório HTML. Ao terminar, abre a apresentação no navegador padrão.
+
+Para gerar os resultados sem abrir o navegador:
 
 ```powershell
 .\.venv\Scripts\python.exe main.py --sem-abrir
 ```
 
-A execução sobrescreve as saídas derivadas em `web/`, preservando os CSVs de origem. Os módulos analíticos executam seus cálculos e verificações durante a importação.
+### 7. Consultar os resultados
 
-**Ambiente local conferido:** Python 3.14.10, pandas 3.1.0 e Matplotlib 3.11.2. A instalação em um ambiente novo não foi validada nesta documentação.
+Após a execução, os arquivos ficam disponíveis em:
+
+| Caminho | Conteúdo |
+|---|---|
+| `web/index.html` | Apresentação dos resultados e interpretações |
+| `web/imagens/` | Gráficos gerados |
+| `web/tabelas/` | Tabelas CSV, manifesto das fontes e totais de referência |
+| `Estrutura_de_pensamento/` | Perguntas, metodologia e limitações |
+
+Abra `web/index.html` no navegador para consultar o relatório. A apresentação funciona localmente, sem servidor web.
+
+Novas execuções substituem o relatório, as imagens e as tabelas derivadas. Os CSVs de origem são preservados.
+
+### Executar uma análise individual
+
+Para executar um módulo, utilize seu nome a partir da raiz do projeto:
+
+```powershell
+.\.venv\Scripts\python.exe -m analises.pagamentos
+```
+
+Esse comando executa o módulo e suas dependências. As informações exibidas no terminal dependem dos `print()` habilitados no arquivo.
+
+Para atualizar a apresentação completa, execute `main.py`.
 
 ## Fonte e documentação
 
