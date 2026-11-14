@@ -1,3 +1,5 @@
+> Documento revisado em 14/11/2026. Preserva a lógica da análise inicial e incorpora os recortes implementados na versão final. Definições comuns em [Critérios dos indicadores](Crit%C3%A9rios%20dos%20indicadores.md); histórico de implementação em [Entrega da evolução](Entrega%20da%20evolu%C3%A7%C3%A3o.md).
+
 # Análise dos prazos de entrega — Olist
 
 ## 1. Objetivo
@@ -43,7 +45,7 @@ Principais campos:
 | `order_estimated_delivery_date` | Data estimada, utilizada como prazo prometido nesta análise |
 | `customer_state` | Estado de destino do cliente |
 
-A data de envio foi considerada relevante para investigar etapas do processo, mas não foi necessária para calcular os indicadores desta análise.
+As datas de aprovação e entrega ao transportador não são necessárias para classificar o atraso final, mas são utilizadas no aprofundamento dos intervalos logísticos descrito na seção 10.
 
 ## 5. Definição de atraso
 
@@ -209,3 +211,42 @@ A prioridade final deve considerar:
 - A influência específica dos atrasos extremos sobre a média não foi quantificada neste documento.
 - Os resultados descrevem padrões e orientam investigações, sem comprovar causas.
 - Cenários de redução são ilustrativos e não constituem previsões.
+
+## 10. Aprofundamento: concentração temporal e etapas da espera
+
+### Como a investigação evoluiu
+
+O resumo estadual revelou onde há mais atrasos. Para localizar episódios, `analises/entregas.py` acrescenta o mês da compra com `dt.to_period('M')`, agrupa pedidos por UF/mês e calcula quantidade, taxa, mediana e percentil 90 somente dos atrasados. Um grupo sem atrasos mantém duração indisponível; não recebe zero.
+
+SP e RJ concentram **50,73% dos atrasos**. No RJ, fevereiro e março de 2018 apresentaram:
+
+| Mês da compra | Pedidos avaliáveis | Atrasados | Taxa |
+|---|---:|---:|---:|
+| Fevereiro/2018 | 879 | 299 | 34,02% |
+| Março/2018 | 864 | 298 | 34,49% |
+| Dois meses | 1.743 | 597 | 34,25% |
+
+A taxa conjunta é `597 ÷ 1.743 × 100`, sem média simples das taxas. O destaque considera a presença do problema nos dois meses, não apenas fevereiro por ter um atraso a mais.
+
+### Severidade e intervalos
+
+O percentil 90 dos atrasos gerais é **22 dias**: 90% dos atrasados tiveram atraso de até esse número de dias. As faixas 1–7, 8–15, 16–30 e acima de 30 dias incluem todos os atrasos. A última reúne **345 pedidos, 5,28% dos atrasados**.
+
+Os intervalos usam timestamps e dias fracionários: compra → aprovação, aprovação → transportador, transportador → cliente, compra → cliente e compra → promessa. Cada par tem sua cobertura; ausentes e negativos são contados à parte. A comparação por dia continua restrita à definição de atraso final.
+
+| RJ, compras de fevereiro/março de 2018 | Pedidos | Mediana transportador → cliente |
+|---|---:|---:|
+| No prazo | 1.146 | 11,75 dias |
+| Atrasados | 597 | 34,14 dias |
+| Atraso acima de 30 dias | 75 | 61,45 dias |
+
+O grupo acima de 30 dias está contido nos atrasados. Os recortes não são somados, assim como medianas de etapas não devem ser somadas para obter a mediana do tempo total.
+
+### Uso para gestão e limites adicionais
+
+A comparação direciona a investigação dos registros de transporte e ocorrências do episódio. Uma duração maior não identifica automaticamente a causa ou a responsabilidade pelo atraso; é necessário considerar também o prazo prometido e a composição dos pedidos. Agosto/2018 é mês de borda e não deve ser tratado como plenamente comparável sem verificar a cobertura. As médias e percentis de grupos pequenos exigem leitura conjunta com a quantidade de pedidos.
+
+### Rastreabilidade
+
+- Código: [análise de entregas](../analises/entregas.py) e [gráfico de entregas](../graficos/entregas.py).
+- Evidências: [estado e mês](../web/tabelas/estado_mes.csv), [RJ fevereiro/março](../web/tabelas/rj_fevereiro_marco.csv), [faixas](../web/tabelas/faixas_atraso.csv) e [intervalos por recorte](../web/tabelas/intervalos_recortes.csv).

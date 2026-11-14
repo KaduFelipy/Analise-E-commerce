@@ -1,3 +1,5 @@
+> Documento revisado em 14/11/2026. Preserva a lógica da análise inicial e incorpora os recortes implementados na versão final. Definições comuns em [Critérios dos indicadores](Crit%C3%A9rios%20dos%20indicadores.md); histórico de implementação em [Entrega da evolução](Entrega%20da%20evolu%C3%A7%C3%A3o.md).
+
 # Análise de entregas e desempenho dos vendedores — Olist
 
 ## 1. Objetivo
@@ -253,6 +255,42 @@ O título apresenta a pontualidade geral de 93,23%. A página HTML acrescenta a 
 - Um pedido com vários vendedores aparece associado a cada um deles. A soma dos atrasos por vendedor pode contar o mesmo pedido mais de uma vez.
 - A classificação de atraso usa a entrega final do pedido e não identifica qual vendedor ou etapa causou o atraso.
 - A referência geral de 6,77% considera pedidos distintos. Os indicadores dos vendedores utilizam as associações de cada vendedor com esses pedidos.
-- Não foram controladas diferenças de período, destinos, produtos ou etapas logísticas entre vendedores.
+- O ranking histórico não controla diferenças de composição. O complemento trimestral compara a mesma UF/período, mas ainda não controla produtos, rotas, contratos ou etapas logísticas.
 - Taxas baseadas em poucos pedidos são sensíveis a pequenas mudanças nas contagens.
 - A análise orienta a investigação e não comprova causas ou responsabilidade individual.
+
+## 11. Aprofundamento: vendedor único e referência contextualizada
+
+### Por que acrescentar os recortes
+
+O ranking histórico distingue quantidade de atraso e taxa, mas combina períodos e destinos diferentes. Além disso, a entrega final de um pedido multivendedor não revela qual participante esteve ligado à etapa problemática.
+
+O complemento de vendedor único exclui **1.275 pedidos multivendedor**, preservando **95.195 pedidos avaliáveis**. O detalhamento vendedor × destino × mês produziu 45.887 células, das quais 30.929 têm somente um pedido (67,40%). Essa fragmentação motivou uma comparação trimestral adicional.
+
+### Recorte trimestral e cálculo
+
+O código usa compras de **abril/2017 a junho/2018**, trimestres inteiros dentro da janela mensal principal, sem afirmar completude da extração. O recorte contém 77.705 pedidos de vendedor único. Seleciona dez vendedores por quantidade de atrasos nesse período, com desempate por quantidade de pedidos avaliáveis e ID.
+
+Para cada vendedor, UF e trimestre:
+
+```text
+Taxa do vendedor = atrasados do vendedor ÷ pedidos avaliáveis do vendedor × 100
+Pedidos dos demais = pedidos da UF/trimestre − pedidos do vendedor
+Atrasos dos demais = atrasos da UF/trimestre − atrasos do vendedor
+Taxa dos demais = atrasos dos demais ÷ pedidos dos demais × 100
+```
+
+Sem pedidos de outros vendedores, a referência é indisponível. O próprio vendedor fica fora da referência trimestral. Já a referência mensal anterior agrega todos os vendedores da célula, incluindo o próprio; os dois quadros têm significados distintos.
+
+A seleção trimestral contém **869 células**, sendo **175 com um pedido**, e nenhuma sem pares na extração conferida. Não se compara diretamente essa proporção aos 67,40% mensais: período, população selecionada e granularidade são diferentes.
+
+### Interpretação para a gestão
+
+A comparação ajuda a escolher quais grupos de pedidos examinar em contexto semelhante. O quadro de repetição conta **células UF/trimestre acima da referência**, e não necessariamente trimestres inteiros acima dela. O número de trimestres informa cobertura, sem demonstrar persistência de um efeito ajustado.
+
+Os rótulos curtos do gráfico podem ser relacionados aos IDs no CSV. A seleção por atrasos e os tamanhos desiguais das bases não permitem concluir quem são os “piores vendedores”, afirmar diferença estatística ou atribuir responsabilidade pelo atraso.
+
+### Rastreabilidade
+
+- Código: [vendedores](../analises/vendedores.py) e [gráfico](../graficos/vendedores.py).
+- Evidências: [associações históricas e rótulos](../web/tabelas/vendedores.csv), [células mensais](../web/tabelas/vendedores_celulas.csv), [seleção trimestral](../web/tabelas/vendedores_trimestral.csv), [distribuição das bases](../web/tabelas/bases_trimestrais.csv) e [repetição descritiva](../web/tabelas/repeticao_vendedores.csv).

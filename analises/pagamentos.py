@@ -100,4 +100,19 @@ resumo_parcelamento = compras_cartao.groupby('payment_installments').agg(
 
 assert (resumo_parcelamento['quantidade_pedidos'].sum() == len(compras_cartao))
 
+from analises.vendas import itens_com_categoria
+
+resumo_parcelamento['participacao_pedidos'] = resumo_parcelamento['quantidade_pedidos'] / len(compras_cartao) * 100
+parcelas_raras = resumo_parcelamento.loc[resumo_parcelamento.index > 10].copy()
+categorias_pedido = itens_com_categoria.groupby('order_id')['product_category_name'].agg(['nunique', 'first'])
+categorias_unicas = categorias_pedido.loc[categorias_pedido['nunique'] == 1, ['first']].rename(columns={'first': 'categoria'})
+cartao_categoria = compras_cartao.merge(categorias_unicas, left_on='order_id', right_index=True, how='inner', validate='one_to_one')
+excluidos_multicategoria = len(compras_cartao) - len(cartao_categoria)
+resumo_categoria_parcelas = cartao_categoria.groupby(['categoria', 'payment_installments']).agg(
+    pedidos=('order_id', 'size'), valor_pago=('payment_value', 'sum'),
+    media=('payment_value', 'mean'), mediana=('payment_value', 'median'),
+)
+resumo_categoria_parcelas['participacao_pedidos_categoria'] = resumo_categoria_parcelas['pedidos'] / resumo_categoria_parcelas.groupby(level=0)['pedidos'].transform('sum') * 100
+resumo_categoria_parcelas['participacao_valor_categoria'] = resumo_categoria_parcelas['valor_pago'] / resumo_categoria_parcelas.groupby(level=0)['valor_pago'].transform('sum') * 100
+
 # print(f'\nValor da compra por quantidade de parcelas \n{resumo_parcelamento.round(2).to_string()}')

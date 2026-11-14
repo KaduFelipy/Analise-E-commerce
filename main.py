@@ -1,73 +1,42 @@
-from pathlib import Path
+﻿from pathlib import Path
+import argparse
 import webbrowser
 
-from analises.vendas import vendas_mensais
-from graficos.vendas import criar_grafico_vendas
-
-from analises.entregas import pedidos_analisados, resumo_estados
+from analises import entregas, vendas, geo, vendedores
+from analises import satisfacao_fidelizacao as satisfacao, pagamentos
 from graficos.entregas import criar_grafico_entregas
-
-from analises.geo import resumo_estados as resumo_geo
+from graficos.vendas import criar_grafico_vendas, criar_grafico_contribuicoes
 from graficos.geo import criar_grafico_geo
-
-from analises.vendedores import resumo_vendedores
 from graficos.vendedores import criar_grafico_vendedores
-
-from analises.satisfacao_fidelizacao import resumo_satisfacao, resumo_recorrencia
 from graficos.satisfacao_fidelizacao import criar_grafico_satisfacao_fidelizacao
-
-from analises.pagamentos import resumo_formas, resumo_parcelamento
 from graficos.pagamentos import criar_grafico_pagamentos
+from web.relatorio import gerar_relatorio
 
 
+def main():
+    parser = argparse.ArgumentParser(description='Regenera figuras, tabelas e relatório Olist.')
+    parser.add_argument('--sem-abrir', action='store_true', help='Gera a entrega sem abrir o navegador.')
+    argumentos = parser.parse_args()
+    caminhos = [
+        criar_grafico_entregas(entregas.pedidos_analisados, entregas.resumo_estados),
+        criar_grafico_vendas(vendas.vendas_mensais),
+        criar_grafico_contribuicoes(vendas.contribuicoes_categorias),
+        criar_grafico_geo(geo.resumo_integrado),
+        criar_grafico_vendedores(entregas.pedidos_analisados, vendedores.resumo_vendedores),
+        criar_grafico_pagamentos(pagamentos.resumo_formas, pagamentos.resumo_parcelamento),
+    ]
+    caminhos.extend(criar_grafico_satisfacao_fidelizacao(
+        satisfacao.resumo_satisfacao, satisfacao.resumo_recorrencia,
+        satisfacao.resumo_recompra, satisfacao.resumo_momento,
+    ))
+    caminho_html = gerar_relatorio()
+    for caminho in [*caminhos, caminho_html]:
+        if not Path(caminho).is_file():
+            raise FileNotFoundError(caminho)
+    print(f'Geradas {len(caminhos)} figuras, tabelas e página: {caminho_html}')
+    if not argumentos.sem_abrir:
+        webbrowser.open(caminho_html.as_uri())
 
 
-caminho_grafico_entregas = criar_grafico_entregas(
-    pedidos_analisados, resumo_estados
-)
-
-caminho_grafico_vendas = criar_grafico_vendas(vendas_mensais)
-
-caminho_grafico_geo = criar_grafico_geo(resumo_geo)
-
-caminho_grafico_vendedores = criar_grafico_vendedores(
-    pedidos_analisados,
-    resumo_vendedores
-)
-
-caminho_grafico_satisfacao = criar_grafico_satisfacao_fidelizacao(
-    resumo_satisfacao,
-    resumo_recorrencia
-)
-
-caminho_grafico_pagamentos = criar_grafico_pagamentos(
-    resumo_formas,
-    resumo_parcelamento
-)
-
-
-caminho_html = (
-    Path(__file__).resolve().parent
-    /'web'
-    /'index.html'
-)
-
-if not caminho_grafico_entregas.is_file():
-    raise FileNotFoundError(f'Página não encontrada!')
-
-if not caminho_grafico_vendas.is_file():
-    raise FileNotFoundError(f'Página não encontrada!')
-
-if not caminho_grafico_geo.is_file():
-    raise FileNotFoundError(f'Página não encontrada!')
-
-if not caminho_grafico_vendedores.is_file():
-    raise FileNotFoundError(f'Página não encontrada!')
-
-if not caminho_grafico_satisfacao.is_file():
-    raise FileNotFoundError(f'Página não encontrada!')
-
-if not caminho_grafico_pagamentos.is_file():
-    raise FileNotFoundError(f'Página não encontrada!')
-
-webbrowser.open(caminho_html.as_uri())
+if __name__ == '__main__':
+    main()

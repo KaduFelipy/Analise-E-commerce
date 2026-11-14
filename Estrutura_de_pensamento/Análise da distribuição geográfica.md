@@ -1,3 +1,5 @@
+> Documento revisado em 14/11/2026. Preserva a lógica da análise inicial e incorpora os recortes implementados na versão final. Definições comuns em [Critérios dos indicadores](Crit%C3%A9rios%20dos%20indicadores.md); histórico de implementação em [Entrega da evolução](Entrega%20da%20evolu%C3%A7%C3%A3o.md).
+
 # Análise da distribuição geográfica — Olist
 
 ## 1. Objetivo
@@ -75,3 +77,35 @@ Para a gestão, o valor vendido mostra onde as vendas se concentram. Para avalia
 - Um cliente que comprou para estados diferentes pode ser contado em cada estado de destino. A soma das contagens estaduais pode superar o número de clientes distintos na base selecionada.
 - A proporção de frete é calculada sobre os totais de cada estado. Ela não representa a média dos percentuais de cada pedido.
 - A análise não verificou quanto do percentual observado se deve ao valor do frete, ao valor dos produtos ou à composição dos pedidos.
+
+## 8. Aprofundamento: exposição comercial e logística no mesmo quadro
+
+### Lógica de construção
+
+O módulo `analises/geo.py` passou a reunir em `resumo_integrado` os totais comerciais por estado e os agregados de prazo de `analises/entregas.py`. A junção é feita entre resumos estaduais, com `validate='one_to_one'`, evitando replicar o atraso a cada item do pedido.
+
+Foram acrescentados participação nas vendas, ticket e frete médio por pedido. A referência nacional usa os totais: por exemplo, proporção nacional de frete = frete total ÷ valor total dos produtos. Não é a média simples dos percentuais estaduais.
+
+| Destino | Participação nas vendas | Taxa de atraso | Frete sobre produtos |
+|---|---:|---:|---:|
+| SP | 38,33% | 4,49% | 13,85% |
+| RJ | 13,31% | 12,11% | 16,81% |
+| MG | 11,74% | 4,57% | 17,16% |
+| RS | 5,51% | 6,08% | 18,19% |
+| PR | 5,04% | 4,04% | 17,36% |
+| Brasil | 100,00% | 6,77% | 16,63% |
+
+Os cinco estados são selecionados por valor dos produtos, e não por atraso ou frete. Nesse conjunto, RJ está acima da taxa nacional de atraso e da proporção nacional de frete; MG, RS e PR estão acima da proporção de frete. Isso identifica combinações para investigação, não um ranking de rentabilidade ou qualidade operacional.
+
+### Denominadores e decisões apoiadas
+
+Valores, ticket e frete usam **96.478 pedidos entregues**; taxa de atraso usa **96.470 avaliáveis**. Em SP são 40.501 pedidos comerciais e 40.494 avaliáveis; no RS, 5.345 e 5.344. A diferença é de elegibilidade, não uma divergência a corrigir excluindo pedidos das vendas.
+
+Ticket e frete médio ajudam a distinguir frete absoluto elevado de uma proporção elevada por baixo valor dos produtos. Os números não separam efeitos de distância, peso, composição, contrato ou política comercial. O frete registrado não comprova o custo da empresa. A tabela de geolocalização é carregada pelo módulo, mas suas coordenadas não são usadas para gerar um mapa ou calcular distâncias na análise atual.
+
+### Apresentação e evidências
+
+As barras mostram participação e o gráfico de pontos compara ticket e frete nos mesmos destinos. O ranking de proporção de frete mantém quantidade de pedidos. Um mapa não foi incluído porque a pergunta atual é comparar valores exatos entre destinos.
+
+- Código: [análise geográfica](../analises/geo.py) e [gráfico geográfico](../graficos/geo.py).
+- Evidências: [quadro estadual completo](../web/tabelas/geografia.csv) e [destinos principais com referência nacional](../web/tabelas/destinos_principais.csv).

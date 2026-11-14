@@ -185,5 +185,28 @@ ticket_comparavel = vendas_mensais.loc[
 mes_maior_ticket = ticket_comparavel["ticket_medio"].idxmax()
 mes_menor_ticket = ticket_comparavel["ticket_medio"].idxmin()
 
+
+def calcular_contribuicoes(dados):
+    tabela = dados.groupby(['product_category_name', 'mes_compra'])['price'].sum().unstack(fill_value=0)
+    meses = pd.PeriodIndex(['2017-11', '2017-12'], freq='M')
+    tabela = tabela.reindex(columns=meses, fill_value=0)
+    tabela.columns = ['novembro', 'dezembro']
+    tabela['diferenca_reais'] = tabela['dezembro'] - tabela['novembro']
+    return tabela.sort_values('diferenca_reais')
+
+
+categorias_mensais = itens_com_categoria.groupby(['mes_compra', 'product_category_name']).agg(
+    valor_vendido=('price', 'sum'), itens=('order_item_id', 'size'), pedidos_com_categoria=('order_id', 'nunique'),
+)
+contribuicoes_categorias = calcular_contribuicoes(itens_com_categoria)
+comparacao_nov_dez = vendas_mensais.loc['2017-11':'2017-12'].copy()
+comparacao_nov_dez['quantidade_itens'] = itens_vendidos.groupby('mes_compra').size()
+comparacao_nov_dez['itens_por_pedido'] = comparacao_nov_dez['quantidade_itens'] / comparacao_nov_dez['quantidade_pedidos']
+comparacao_nov_dez['preco_medio_item'] = comparacao_nov_dez['valor_vendido'] / comparacao_nov_dez['quantidade_itens']
+assert isclose(contribuicoes_categorias['diferenca_reais'].sum(), comparacao_nov_dez['valor_vendido'].diff().iloc[-1], abs_tol=0.01)
+assert all(isclose(r.ticket_medio, r.itens_por_pedido * r.preco_medio_item) for r in comparacao_nov_dez.itertuples())
+variacoes_nov_dez = comparacao_nov_dez.pct_change(fill_method=None).iloc[-1] * 100
+comparacao_anos = vendas_mensais.loc[vendas_mensais.index.month.isin(range(2, 8))].copy()
+
 # print(f'\nMaior ticket médio: \n{ticket_comparavel.loc[mes_maior_ticket]}')
 # print(f'\nMenor ticket médio: \n{ticket_comparavel.loc[mes_menor_ticket]}')
